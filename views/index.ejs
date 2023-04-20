@@ -5,22 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <div class="card">
-        <div class="weather">
-            <h3 class="city">Weather in Horana</h3>
-            <div class="temp">51 c</div>
-            <img src="" alt="" class="ico">
-            <div class="discription"></div>
-            <div class="humidity"></div>
-        </div>
-    </div>
-    <script>
-        
-    </script>
+    <nav>
+        <h3>Weather App</h3>
+    </nav>
+    <section class="content">
+        <% data.forEach(city => { %>
+            <div class="card">
+                <div class="weather">
+                    <h3 class="city">Weather in <%= city.name %></h3>
+                    <div class="temp"><%= city.main.temp %></div>
+                    <img src="" alt="" class="ico">
+                    <div class="discription"></div>
+                    <div class="humidity"></div>
+                </div>
+            </div>
+        <% }) %>
+    </section>
+    <footer>
+        <p>Developed by dcv-k</p>
+    </footer>
 </body>
 </html>
