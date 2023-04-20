@@ -1,6 +1,10 @@
 body {
     height: 100vh;
     margin: 0;
+    background-color:  #566573 ;
+    background-image: url("./background.jpg");
+    background-size: cover;
+    background-position: center center;
 }
 
 nav {
@@ -17,12 +21,61 @@ nav {
 }
 
 .card {
-    background-color: aliceblue;
+    background-color: whitesmoke;
     padding: 2em;
     width: 100%;
     max-width: 420px;
     margin: 1em;
 } 
+
+.discription {
+    background-color:   #a6acaf;
+    font-size: 2em;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+        "col-1 . col-5"
+        "col-2 col-4 ."
+        "col-3 . col-6";
+    gap: 5px;
+    background-color:   #5499c7  ;
+}
+  
+  
+  .pressure {
+    grid-area: col-1;
+    background-color: lightgreen;
+  }
+  
+  .humidity {
+    grid-area: col-2;
+    background-color: lightgreen;
+  }
+
+  .visibility {
+    grid-area: col-3;
+    background-color: lightgreen;
+  }
+  
+  .wind {
+    grid-area: col-4;
+    background-color: lightpink;
+  }
+  
+  .sunrise {
+    grid-area: col-5;
+    background-color: lightsalmon;
+  }
+  
+  .sunset {
+    grid-area: col-6;
+    background-color: lightsalmon;
+  }
+  
 
 footer {
     display: flex;

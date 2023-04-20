@@ -15,9 +15,12 @@ app.listen(3000, () => {
 
 app.get("/", async (req, res) => {
     if (cache.get('weatherData')) {
+      // step 4 : render already cached data
+
       res.render("index", { data: cache.get('weatherData') })
     } else {
       const data = fs.readFileSync("./cities.json");
+      // step 1 : get city array
       const cityArr = JSON.parse(data).List;
     
       let str = "";
@@ -30,6 +33,7 @@ app.get("/", async (req, res) => {
     
       let response;
       try {
+        // step 2: API call
         response = await axios.get(
           "https://api.openweathermap.org/data/2.5/group?" +
             "id=" +
@@ -41,8 +45,10 @@ app.get("/", async (req, res) => {
       } catch (error) {
         console.log(error);
       }
-
-      cache.put('weatherData', response.data.list, 60000)
+      
+      // step 4 : insert into the cache
+      cache.put('weatherData', response.data.list, 300000)
+      
       res.render("index", { data: response.data.list })
     }
   });

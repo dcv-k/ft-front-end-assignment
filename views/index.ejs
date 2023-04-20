@@ -11,15 +11,31 @@
     <nav>
         <h3>Weather App</h3>
     </nav>
+    <!-- step 3 : UI -->
     <section class="content">
         <% data.forEach(city => { %>
             <div class="card">
                 <div class="weather">
                     <h3 class="city">Weather in <%= city.name %></h3>
+                    <div class="last-update">last update: <%= new Date(city.dt * 1000).toLocaleString() %></div>
                     <div class="temp"><%= city.main.temp %></div>
-                    <img src="" alt="" class="ico">
-                    <div class="discription"></div>
-                    <div class="humidity"></div>
+                    <div class="temp-min">Temp min: <%= city.main.temp_min %></div>
+                    <div class="temp-max">Temp max: <%= city.main.temp_max %></div>
+                    
+                    <div class="discription">
+                        <img src="https://openweathermap.org/img/wn/<%= city.weather[0].icon %>.png" alt="weather icon" class="ico">
+                        <%= city.weather[0].description %></div>
+                    <div class="row">
+                        <div class="pressure"><%= city.main.pressure %>hPa</div>
+                        <div class="humidity"><%= city.main.humidity %>%</div>
+                        <div class="visibility"><%= (city.visibility / 1000).toFixed(1) %>km</div>
+
+                        <div class="wind"><%= city.wind.speed %>km/s <%= city.wind.deg %>Degree</div>
+
+                        <div class="sunrise">Sunrise: <%= new Date(city.sys.sunrise * 1000).toLocaleTimeString() %></div>
+                        <div class="sunset">Sunset: <%= new Date(city.sys.sunset * 1000).toLocaleTimeString() %></div>
+                    </div>
+                    
                 </div>
             </div>
         <% }) %>
