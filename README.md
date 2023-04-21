@@ -4,7 +4,7 @@
 git clone https://github.com/dcv-k/ft-front-end-assignment.git
 
 # Install the dependencies
-cd ft-front-end-assignment
+cd ft-front-end-assignment  
 npm install
 
 # Create a .env file at the root of the project with the following contents
