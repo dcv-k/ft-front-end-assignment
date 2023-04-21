@@ -12,4 +12,4 @@ API_KEY=API key from openweathermap.org
 PORT=Port Number
 
 # Start the application
-npm start
+npm run start
