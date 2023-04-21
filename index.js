@@ -9,8 +9,11 @@ const app = express()
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 
-app.listen(process.env.PORT, () => {
-    console.log("listening on port "+ process.env.PORT)
+let API_KEY = "83dd8a350290b263b44e060cb003ebf3"
+let PORT = "3000"
+
+app.listen(PORT, () => {
+    console.log("listening on port "+ PORT)
 })
 
 app.get("/", async (req, res) => {
@@ -30,7 +33,7 @@ app.get("/", async (req, res) => {
         }
         str += cityArr[i].CityCode;
       }
-    
+        
       let response;
       try {
         // step 2: API call
@@ -40,7 +43,7 @@ app.get("/", async (req, res) => {
             str +
             "&units=metric" +
             "&APPID=" +
-            process.env.API_KEY
+            API_KEY
         );
       } catch (error) {
         console.log(error);
