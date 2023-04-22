@@ -41,7 +41,7 @@ const WeatherDetails = ({ data, handleSingleTile }) => {
                     <p>Visibility: {(data.visibility / 1000).toFixed(1)}Km</p>
                 </div>
                 <div className="single-col col-2">
-                <img className="arrow-icon" src="arrowhead-invert.png" />
+                <img alt="arrow" className="arrow-icon" src="arrowhead-invert.png" />
                     <p>{data.wind.speed}Km/s {data.wind.deg}Degree</p>
                 </div>
                 <div className="single-col col-3">
