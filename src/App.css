@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  flex-grow: 0;
+}
+
+nav img {
+  width: 50px;
+}
+
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #7E7F83;
+  background-color: #30333D;
+  flex-grow: 0;
+}
+
+footer p {
+  font-weight: bolder;
+}
