@@ -1,3 +1,9 @@
+# Dashboard
+![dashboard](https://user-images.githubusercontent.com/120501997/233762082-19ac4337-0b82-497d-b129-6a77a79e9574.png)
+
+# View Weather
+![view-single](https://user-images.githubusercontent.com/120501997/233762106-320e5a9b-0add-44ca-ac77-d214a78b042b.png)
+
 # Install dependencies for client, in in root directory
 npm install
 
