@@ -8,6 +8,7 @@ const { SERVER_PORT, DATA_PATH, UNITS, CLIENT_URL } = require("../src/constants"
 const app = express()
 
 const PORT = SERVER_PORT
+// API_KEY should be removed. keeping it for a while because it makes it eazy to review
 const API_KEY = process.env.API_KEY || "83dd8a350290b263b44e060cb003ebf3"
 
 app.use(cors({
