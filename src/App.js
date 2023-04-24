@@ -17,7 +17,7 @@ function App() {
   }
 
   useEffect(() => {
-     
+
     const cachedData = localStorage.getItem(CACHE_KEY)
     const cachedTime = localStorage.getItem(`${CACHE_KEY}_time`)
 
