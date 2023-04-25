@@ -4,13 +4,15 @@
     height: 450px;
     margin: 20px;
     background-color: #333;
-    box-shadow: 10px -2px 20px 2px rgb(0 0 0 / 30% );
+    border-radius: 10px;
 }
 
 .single-top {
     background-size: cover;
     display: flex;
     flex-direction: column;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .single-description-wrap {
@@ -42,14 +44,17 @@
 }
 
 .single-top-row div{
-    margin-left: 30px;
-    margin-right: 30px;
+    padding-left:  30px;
+    padding-right: 30px;
 }
 
 .single-bottom {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .single-col {
@@ -93,6 +98,33 @@
     font-weight: 600;
     font-size: 50px;
     width: auto;
-    letter-spacing: -5px;
     margin: 10px 0;
 }
+
+.single-description-wrap {
+    padding-right: 1em;
+    position: relative;
+}
+
+.single-description-wrap::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 2px;
+    height: 60%; 
+    transform: translateY(-50%);
+    background-color: #fff;
+}
+
+@media only screen and (max-width: 480px) {
+    .single-bottom {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .single-weather-tile {
+        height: 550px;
+    }
+
+  }

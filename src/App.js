@@ -1,5 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import Search from './components/search/Search';
 import WeatherTile from './components/weather-tile/WeatherTile';
 import WeatherDetails from './components/single-weater-tile/SingleWeatherDetails';
 import { CACHE_KEY, EXPIRATION_TIME, SERVER_URL } from './constants';
@@ -10,13 +11,21 @@ function App() {
 
   const [singleTileData, setSingleTileData] = useState("")
   const [weatherData, setWeatherData] = useState([])
+  const [tileColor, setTileColor] = useState("")
 
-
-  const handleSingleTile = (data) => {
+  const handleSingleTile = (data, color) => {
     setSingleTileData(data)
+    setTileColor(color)
+  }
+
+  const removeTile = (event, id) => {
+      setWeatherData(weatherData.filter(obj => obj.id !== id))
+      event.stopPropagation()
   }
 
   useEffect(() => {
+
+    document.title = "Weather App";
 
     const cachedData = localStorage.getItem(CACHE_KEY)
     const cachedTime = localStorage.getItem(`${CACHE_KEY}_time`)
@@ -50,12 +59,16 @@ function App() {
         <h3>Weather App</h3>
       </nav>
 
+      <section>
+        <Search />
+      </section>
+
       <section className="tiles">
 
         {!singleTileData && weatherData.map((data, index) => (
-          <WeatherTile key={index} data={data} handleSingleTile={handleSingleTile} />
+          <WeatherTile key={index} data={data} handleSingleTile={handleSingleTile}  removeTile={removeTile} />
         ))}
-        {singleTileData && <WeatherDetails data={singleTileData} handleSingleTile={handleSingleTile} />}
+        {singleTileData && <WeatherDetails data={singleTileData} color={tileColor} handleSingleTile={handleSingleTile} />}
 
       </section>
 

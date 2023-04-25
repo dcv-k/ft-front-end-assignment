@@ -1,29 +1,60 @@
+.delete-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
 .weather-tile {
-    color: whitesmoke;
+    color: #ffffff;
     width: 400px; 
     margin: 30px;
     background-color: #333;
-    box-shadow: 10px -2px 20px 2px rgb(0 0 0 / 30% );
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.delete-icon {
+    width: 20px;
+    margin: 7px;
+    margin-bottom: 0;
 }
 
 .top {
     background-image: url("../../../public/cloud.png");
     background-size: cover; 
+    min-height: 200px;
 }
 
-.top,
 .bottom {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 20px 5px 20px;
-}
-
-.bottom {
+    padding: 5px 10px 5px 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     font-size: 12px;
     font-weight: bold;
     background-color: #383B47;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.top-content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .top-left {
@@ -52,10 +83,44 @@
     margin: 0;
 }
 
+.col-1 {
+    padding-right: 1em;
+    position: relative;
+}
+
+.col-1::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 40%; 
+    transform: translateY(-50%);
+    background-color: #505466;
+}
+
 .col-2 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-left: .1em;
+    padding-right: .1em;
+}
+
+.col-3 {
+    padding-left: 1em;
+    position: relative;
+}
+
+.col-3::after {
+    content: '';
+    position: absolute;
+    top: 50%; 
+    left: 0;
+    width: 1px;
+    height: 60%; 
+    transform: translateY(-50%);
+    background-color: #505466; 
 }
 
 .weather-icon {
@@ -71,6 +136,46 @@
     font-weight: 600;
     font-size: 40px;
     width: auto;
-    letter-spacing: -5px;
     margin: 10px 0;
 }
+
+.temperature-min {
+    margin: 0;
+}
+
+@media only screen and (max-width: 480px) {
+    .top-content {
+        justify-content: center;
+    }
+
+    .bottom {
+        justify-content: space-between;
+        height: 200px;
+    }
+
+    .col-3 {
+        padding-left: 0;
+    } 
+
+    .col-3::after {
+        content: '';
+        position: absolute;
+        top: 0; 
+        left: 20%;
+        width: 80%;
+        height: 1px; 
+        transform: translateY(-50%);
+        background-color: #505466; 
+    }
+
+    .col-1::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 20%;
+        width: 0;
+        height: 1px; 
+        transform: translateY(-50%);
+        background-color: #505466;
+    }
+  }

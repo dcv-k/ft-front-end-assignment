@@ -1,24 +1,22 @@
 import "./single-weather-tile.css"
 
-const WeatherDetails = ({ data, handleSingleTile }) => {
+const WeatherDetails = ({ data, color, handleSingleTile }) => {
 
     const handleBackBtnClick = () => {
         handleSingleTile("")
     }
 
-    const bg = ["#388EE7", "#6249CC", "#40B681", "#DE944E", "#9C3A3A"]
-
     return (
 
         <div className="single-weather-tile">
-            <div className="single-top" style={{"backgroundColor": bg[Math.floor(Math.random() * 5)]}}>
+            <div className="single-top" style={{"backgroundColor": color}}>
                 <div className="back-btn" onClick={handleBackBtnClick}>
                     <img alt="weather" className="btn-ico" src="back-arrow-invert.png" />
                 </div>
                 <div className="single-top-content">
                     <div className="single-top-center">
                         <p className="single-city">{data.name},{data.sys.country}</p>
-                        <p>{new Date(data.dt * 1000).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true, month: 'short', day: 'numeric'})}</p>
+                        <p>{new Date(data.dt * 1000).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true})}, {new Date(data.dt * 1000).toLocaleString('en-US', {month: 'short', day: 'numeric'})}</p>
                     </div>
                     <div className="single-top-row">
                         <div className="single-description-wrap">
@@ -26,9 +24,9 @@ const WeatherDetails = ({ data, handleSingleTile }) => {
                             <p className="single-weather-description">{data.weather[0].description}</p>
                         </div>
                         <div>
-                            <p className="single-temperature">{Math.floor(data.main.temp)}&#8451;</p>
-                            <p className="single-temperature-max">Temp Min: {Math.floor(data.main.temp_max)}&#8451;</p>
-                            <p className="single-temperature-min">Temp Max: {Math.floor(data.main.temp_min)}&#8451;</p>
+                            <p className="single-temperature">{Math.floor(data.main.temp)}&deg;c</p>
+                            <p className="single-temperature-max">Temp Min: {Math.floor(data.main.temp_max)}&deg;c</p>
+                            <p className="single-temperature-min">Temp Max: {Math.floor(data.main.temp_min)}&deg;c</p>
                         </div>
                     </div>
                 </div>
