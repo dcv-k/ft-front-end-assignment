@@ -1,22 +1,17 @@
 import './App.css';
+import { UNITS } from './constants';
 import { useState, useEffect } from 'react';
 import Search from './components/search/Search';
 import WeatherTile from './components/weather-tile/WeatherTile';
-import WeatherDetails from './components/single-weater-tile/SingleWeatherDetails';
-import { CACHE_KEY, EXPIRATION_TIME, SERVER_URL, UNITS } from './constants';
-// import { dotenv } from "dotenv"
+import SingleWeatherTile from './components/single-weater-tile/SingleWeatherTile';
 
 function App() {
 
-  // dotenv.config()
-
-  const [singleTileData, setSingleTileData] = useState("")
   const [weatherData, setWeatherData] = useState([])
-  const [tileColor, setTileColor] = useState("")
+  const [singleTileData, setSingleTileData] = useState("")
 
-  const handleSingleTile = (data, color) => {
+  const handleSingleTile = (data) => {
     setSingleTileData(data)
-    setTileColor(color)
   }
 
   const removeTile = (event, id) => {
@@ -24,28 +19,44 @@ function App() {
       event.stopPropagation()
   }
 
+  const expireTime = (time, unit) => {
+    if (unit === "MIN") {
+      return time * 60 * 1000
+    } else if (unit === "SEC") {
+      return time * 1000
+    } else {
+      console.log("Unsupported time unit")
+    }
+  }
+
   useEffect(() => {
 
     async function fetchData() {
       try {
+        // STEP 1: Read city data including cache expire time for each city 
         const cityDataResponse = await fetch('/cities.json');
         const cityData = await cityDataResponse.json();
   
         const weatherDataPromises = cityData.List.map(async (city) => {
+
+          // STEP 2: Check for cache data and make API calls if cache isn't available
           const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
   
-          if (cacheCity && Date.now() - cacheCity.cachedTime < city.ExpTime) {
+          if (cacheCity && Date.now() - cacheCity.cachedTime < expireTime(city.ExpTime, city.ExpTimeUnit)) {
             return cacheCity.data;
           } else {
-            const weatherDataResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${UNITS}&APPID=83dd8a350290b263b44e060cb003ebf3`);
+            const weatherDataResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${UNITS}&APPID=${process.env.REACT_APP_API_KEY}`);
             const weatherData = await weatherDataResponse.json();
+            console.log(weatherData.weather[0].main)
             localStorage.setItem(city.CityCode, JSON.stringify({ data: weatherData, cachedTime: Date.now() }));
             return weatherData;
           }
+
         });
   
         const weatherData = await Promise.all(weatherDataPromises);
         setWeatherData(weatherData);
+
       } catch (error) {
         console.error(error);
       }
@@ -72,7 +83,7 @@ function App() {
         {!singleTileData && weatherData.map((data, index) => (
           <WeatherTile key={index} data={data} handleSingleTile={handleSingleTile}  removeTile={removeTile} />
         ))}
-        {singleTileData && <WeatherDetails data={singleTileData} color={tileColor} handleSingleTile={handleSingleTile} />}
+        {singleTileData && <SingleWeatherTile data={singleTileData} handleSingleTile={handleSingleTile} />}
 
       </section>
 

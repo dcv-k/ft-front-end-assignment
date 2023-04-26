@@ -9,7 +9,7 @@ const WeatherDetails = ({ data, color, handleSingleTile }) => {
     return (
 
         <div className="single-weather-tile">
-            <div className="single-top" style={{"backgroundColor": color}}>
+            <div className={data.weather[0].main + " single-top"}>
                 <div className="back-btn" onClick={handleBackBtnClick}>
                     <img alt="weather" className="btn-ico" src="back-arrow-invert.png" />
                 </div>

@@ -143,6 +143,22 @@
     margin: 0;
 }
 
+.Rain {
+    background-color: #388EE7;
+}
+
+.Clear {
+    background-color: #6249CC;
+}
+
+.Clouds {
+    background-color: #40B681;
+}
+
+.Snow {
+    background-color: #DE944E;
+}
+
 @media only screen and (max-width: 480px) {
     .top-content {
         justify-content: center;

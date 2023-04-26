@@ -2,8 +2,8 @@ import "./weather-tile.css"
 
 const WeatherTile = ({ data, handleSingleTile, removeTile }) => {
     
-    const handleTileClick = (color) => {
-        handleSingleTile(data, color)
+    const handleTileClick = () => {
+        handleSingleTile(data)
     }
 
     const handleDeleteClick = (e) => {
@@ -14,8 +14,8 @@ const WeatherTile = ({ data, handleSingleTile, removeTile }) => {
     
     return (
 
-        <div className="weather-tile" onClick={() => handleTileClick(bg[data.id % 5])}>
-            <div className="top" style={{"backgroundColor": bg[data.id % 5]}}>
+        <div className="weather-tile" onClick={handleTileClick}>
+            <div className={data.weather[0].main + " top"}>
                 <div className="delete-wrap">
                     <img alt="close" onClick={handleDeleteClick} className="delete-icon" src={"cross.png"} />
                 </div>
