@@ -62,7 +62,7 @@ function App() {
       
       <nav>
         <img className="logo" src="logo.png" alt="logo"/>
-        <h3>Weather App</h3>
+        <p>Weather App</p>
       </nav>
 
       <section>
