@@ -3,11 +3,12 @@ import { useState, useEffect } from 'react';
 import Search from './components/search/Search';
 import WeatherTile from './components/weather-tile/WeatherTile';
 import WeatherDetails from './components/single-weater-tile/SingleWeatherDetails';
-import { CACHE_KEY, EXPIRATION_TIME, SERVER_URL } from './constants';
+import { CACHE_KEY, EXPIRATION_TIME, SERVER_URL, UNITS } from './constants';
+// import { dotenv } from "dotenv"
 
 function App() {
 
-  const API_ENDPOINT = `${SERVER_URL}/api`;
+  // dotenv.config()
 
   const [singleTileData, setSingleTileData] = useState("")
   const [weatherData, setWeatherData] = useState([])
@@ -25,31 +26,34 @@ function App() {
 
   useEffect(() => {
 
-    document.title = "Weather App";
-
-    const cachedData = localStorage.getItem(CACHE_KEY)
-    const cachedTime = localStorage.getItem(`${CACHE_KEY}_time`)
-
-    // STEP 4: Using cached data that is not expired
-    if (cachedData && cachedTime && Date.now() - cachedTime < EXPIRATION_TIME) {
-
-      setWeatherData(JSON.parse(cachedData))
-
-    } else {
-
-      fetch(API_ENDPOINT)
-      .then((response) => response.json())
-      .then((data) => {
-        setWeatherData(data.data)
-        // STEP 4: Saving fetch data and time to local storage 
-        localStorage.setItem(CACHE_KEY, JSON.stringify(data.data))
-        localStorage.setItem(`${CACHE_KEY}_time`, Date.now())
-      })
-      .catch((error) => console.error(error));
-
+    async function fetchData() {
+      try {
+        const cityDataResponse = await fetch('/cities.json');
+        const cityData = await cityDataResponse.json();
+  
+        const weatherDataPromises = cityData.List.map(async (city) => {
+          const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
+  
+          if (cacheCity && Date.now() - cacheCity.cachedTime < city.ExpTime) {
+            return cacheCity.data;
+          } else {
+            const weatherDataResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${UNITS}&APPID=83dd8a350290b263b44e060cb003ebf3`);
+            const weatherData = await weatherDataResponse.json();
+            localStorage.setItem(city.CityCode, JSON.stringify({ data: weatherData, cachedTime: Date.now() }));
+            return weatherData;
+          }
+        });
+  
+        const weatherData = await Promise.all(weatherDataPromises);
+        setWeatherData(weatherData);
+      } catch (error) {
+        console.error(error);
+      }
     }
-
+  
+    fetchData();
   }, [])
+
   
   return (
     <div className="container">
