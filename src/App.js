@@ -1,5 +1,6 @@
 import './App.css';
 import { UNITS } from './constants';
+import { timeToMilliseconds } from './services';
 import { useState, useEffect } from 'react';
 import Search from './components/search/Search';
 import WeatherTile from './components/weather-tile/WeatherTile';
@@ -19,16 +20,6 @@ function App() {
       event.stopPropagation()
   }
 
-  const expireTime = (time, unit) => {
-    if (unit === "MIN") {
-      return time * 60 * 1000
-    } else if (unit === "SEC") {
-      return time * 1000
-    } else {
-      console.log("Unsupported time unit")
-    }
-  }
-
   useEffect(() => {
 
     async function fetchData() {
@@ -42,7 +33,7 @@ function App() {
           // STEP 2: Check for cache data and make API calls if cache isn't available
           const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
   
-          if (cacheCity && Date.now() - cacheCity.cachedTime < expireTime(city.ExpTime, city.ExpTimeUnit)) {
+          if (cacheCity && Date.now() - cacheCity.cachedTime < timeToMilliseconds(city.ExpTime, city.ExpTimeUnit)) {
             return cacheCity.data;
           } else {
             const weatherDataResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${UNITS}&APPID=${process.env.REACT_APP_API_KEY}`);
@@ -70,7 +61,7 @@ function App() {
     <div className="container">
       
       <nav>
-        <img className="logo" src="logo.png" />
+        <img className="logo" src="logo.png" alt="logo"/>
         <h3>Weather App</h3>
       </nav>
 

@@ -1,6 +1,7 @@
 import "./single-weather-tile.css"
+import { formatTime, formatTimeAndDate } from "../../services"
 
-const WeatherDetails = ({ data, color, handleSingleTile }) => {
+const WeatherDetails = ({ data, handleSingleTile }) => {
 
     const handleBackBtnClick = () => {
         handleSingleTile("")
@@ -16,7 +17,7 @@ const WeatherDetails = ({ data, color, handleSingleTile }) => {
                 <div className="single-top-content">
                     <div className="single-top-center">
                         <p className="single-city">{data.name},{data.sys.country}</p>
-                        <p>{new Date(data.dt * 1000).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true})}, {new Date(data.dt * 1000).toLocaleString('en-US', {month: 'short', day: 'numeric'})}</p>
+                        <p>{formatTimeAndDate(data.dt)}</p>
                     </div>
                     <div className="single-top-row">
                         <div className="single-description-wrap">
@@ -43,8 +44,8 @@ const WeatherDetails = ({ data, color, handleSingleTile }) => {
                     <p>{data.wind.speed}Km/s {data.wind.deg}Degree</p>
                 </div>
                 <div className="single-col col-3">
-                    <p>Sunrise: {new Date(data.sys.sunrise * 1000).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute:'numeric' })}</p>
-                    <p>Sunset: {new Date(data.sys.sunset * 1000).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute:'numeric' })}</p>
+                    <p>Sunrise: {formatTime(data.sys.sunrise)}</p>
+                    <p>Sunset: {formatTime(data.sys.sunset)}</p>
                 </div>
             </div>
         </div>
