@@ -38,7 +38,7 @@ function App() {
           } else {
             const weatherDataResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${UNITS}&APPID=${process.env.REACT_APP_API_KEY}`);
             const weatherData = await weatherDataResponse.json();
-            console.log(weatherData.weather[0].main)
+            
             localStorage.setItem(city.CityCode, JSON.stringify({ data: weatherData, cachedTime: Date.now() }));
             return weatherData;
           }
