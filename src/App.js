@@ -22,6 +22,8 @@ function App() {
 
   useEffect(() => {
 
+    document.title = "Weather App";
+
     async function fetchData() {
       try {
         // STEP 1: Read city data including cache expire time for each city 
@@ -34,12 +36,14 @@ function App() {
           const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
   
           if (cacheCity && Date.now() - cacheCity.cachedTime < timeToMilliseconds(city.ExpTime, city.ExpTimeUnit)) {
+            console.log("loading cache data for: ", city.CityName)
             return cacheCity.data;
           } else {
             const weatherDataResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${UNITS}&APPID=${process.env.REACT_APP_API_KEY}`);
             const weatherData = await weatherDataResponse.json();
             
             localStorage.setItem(city.CityCode, JSON.stringify({ data: weatherData, cachedTime: Date.now() }));
+            console.log("saved new cache data for: ", city.CityName)
             return weatherData;
           }
 

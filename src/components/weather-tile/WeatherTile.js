@@ -14,7 +14,7 @@ const WeatherTile = ({ data, handleSingleTile, removeTile }) => {
     return (
 
         <div className="weather-tile" onClick={handleTileClick}>
-            <div className={data.weather[0].main + " top"}>
+            <div className={"w-" + data.weather[0].description.split(" ").join("-") + " top"}>
                 <div className="delete-wrap">
                     <img alt="close" onClick={handleDeleteClick} className="delete-icon" src={"cross.png"} />
                 </div>
