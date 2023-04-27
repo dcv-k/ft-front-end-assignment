@@ -69,14 +69,16 @@ function App() {
         <Search />
       </section>
 
-      <section className="tiles">
+      <div className="content">
+        <section className="tiles">
 
-        {!singleTileData && weatherData.map((data, index) => (
-          <WeatherTile key={index} data={data} handleSingleTile={handleSingleTile}  removeTile={removeTile} />
-        ))}
-        {singleTileData && <SingleWeatherTile data={singleTileData} handleSingleTile={handleSingleTile} />}
+          {!singleTileData && weatherData.map((data, index) => (
+            <WeatherTile key={index} data={data} handleSingleTile={handleSingleTile}  removeTile={removeTile} />
+          ))}
+          {singleTileData && <SingleWeatherTile data={singleTileData} handleSingleTile={handleSingleTile} />}
 
-      </section>
+        </section>
+      </div>
 
       <footer>
         <p>2023 Fidenz Technologies</p>
