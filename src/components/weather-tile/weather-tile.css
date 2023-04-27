@@ -30,7 +30,7 @@
     justify-content: space-between;
     align-items: stretch;
 
-    min-height: 200px;
+    /* min-height: 200px; */
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 
@@ -171,11 +171,23 @@
 
 @media only screen and (max-width: 480px) {
     .top-content {
+        flex-direction: column;
         justify-content: center;
+    }
+
+    .col-2 {
+        order: 3;
+        justify-self: stretch;
+    }
+
+    .col-3 {
+        border: none;
+        order: 2;
     }
 
     .bottom {
         justify-content: space-between;
+        align-items: start;
         height: 200px;
     }
 
@@ -189,7 +201,7 @@
         top: 0; 
         left: 20%;
         width: 80%;
-        height: 1px; 
+        height: 0; 
         transform: translateY(-50%);
         background-color: #505466; 
     }
