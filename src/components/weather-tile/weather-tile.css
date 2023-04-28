@@ -14,7 +14,7 @@
 
 .weather-tile {
     
-    width: 400px; 
+    width: 430px; 
     margin: 30px;
     border-radius: 10px;
     cursor: pointer;
@@ -61,7 +61,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 20px 5px 20px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     font-size: 12px;
@@ -149,25 +149,41 @@
     margin: 0;
 }
 
-.Rain {
+[class^="w-"] {
+    background-color: #9c3939;
+}
+
+.w-overcast-clouds {
     background-color: #388EE7;
 }
 
-.Clear {
+.w-few-clouds {
+    background-color: #388EE7;
+}
+
+.w-broken-clouds {
+    
     background-color: #6249CC;
 }
 
-.Clouds {
+.w-clear-sky { 
     background-color: #40B681;
 }
 
-.Snow {
-    background-color: #DE944E;
+.w-moderate-rain {
+    background-color: #9c3939;  
 }
 
-.Mist {
-    background-color: #9c3939; 
+.w-light-rain {
+    background-color: #DE944E; 
 }
+
+.w-mist {
+    background-color: #9c3939;
+}
+
+
+
 
 @media only screen and (max-width: 480px) {
     .top-content {
@@ -177,7 +193,7 @@
 
     .col-2 {
         order: 3;
-        justify-self: stretch;
+        flex-grow: 1;
     }
 
     .col-3 {
