@@ -1,17 +1,3 @@
-.delete-wrap {
-    display: flex;
-    justify-content: flex-end;
-
-    width: 100%;
-}
-
-
-.delete-icon {
-    width: 20px;
-    margin: 7px;
-    margin-bottom: 0;
-}
-
 .weather-tile {
     
     width: 430px; 
@@ -24,20 +10,17 @@
     
 }
 
-.top {
+.delete-wrap {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: flex-end;
 
-    /* min-height: 200px; */
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    width: 100%;
+}
 
-    background-image: url("../../../public/cloud.png");
-    background-size: cover;
-    background-repeat: no-repeat; 
-
+.delete-icon {
+    width: 20px;
+    margin: 7px;
+    margin-bottom: 0;
 }
 
 .top-content {
@@ -50,10 +33,61 @@
     padding-right: 30px;
 }
 
+.top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+
+    background-image: url("../../../public/cloud.png");
+    background-size: cover;
+    background-repeat: no-repeat; 
+
+}
+
 .top-left {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.city {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.description-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-icon {
+    width: 40px;
+}
+
+.weather-description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    margin: 0;
+}
+
+.temperature {
+    font-weight: 600;
+    font-size: 40px;
+    width: auto;
+    margin: 10px 0;
+}
+
+.temperature-min {
+    margin: 0;
 }
 
 .bottom {
@@ -67,26 +101,6 @@
     font-size: 12px;
     font-weight: bold;
     background-color: #383B47;
-}
-
-.city {
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 1;
-    margin: 0;
-    letter-spacing: 1px;
-}
-.description-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.weather-description {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1;
-    margin: 0;
 }
 
 .col-1 {
@@ -113,6 +127,11 @@
     padding-right: .1em;
 }
 
+.arrow-icon {
+    width: 20px;
+    transform: rotate(45deg);
+}
+
 .col-3 {
     padding-left: 1em;
     position: relative;
@@ -129,97 +148,16 @@
     background-color: #505466; 
 }
 
-.weather-icon {
-    width: 40px;
-}
-
-.arrow-icon {
-    width: 20px;
-    transform: rotate(45deg);
-}
-
-.temperature {
-    font-weight: 600;
-    font-size: 40px;
-    width: auto;
-    margin: 10px 0;
-}
-
-.temperature-min {
-    margin: 0;
-}
-
-[class^="w-"] {
-    background-color: #9c3939;
-}
-
-.w-overcast-clouds {
-    background-color: #388EE7;
-}
-
-.w-few-clouds {
-    background-color: #388EE7;
-}
-
-.w-broken-clouds {
-    
-    background-color: #6249CC;
-}
-
-.w-clear-sky { 
-    background-color: #40B681;
-}
-
-.w-moderate-rain {
-    background-color: #9c3939;  
-}
-
-.w-light-rain {
-    background-color: #DE944E; 
-}
-
-.w-mist {
-    background-color: #9c3939;
-}
-
-
-
-
 @media only screen and (max-width: 480px) {
     .top-content {
         flex-direction: column;
         justify-content: center;
     }
 
-    .col-2 {
-        order: 3;
-        flex-grow: 1;
-    }
-
-    .col-3 {
-        border: none;
-        order: 2;
-    }
-
     .bottom {
         justify-content: space-between;
         align-items: start;
         height: 200px;
-    }
-
-    .col-3 {
-        padding-left: 0;
-    } 
-
-    .col-3::after {
-        content: '';
-        position: absolute;
-        top: 0; 
-        left: 20%;
-        width: 80%;
-        height: 0; 
-        transform: translateY(-50%);
-        background-color: #505466; 
     }
 
     .col-1::after {
@@ -231,5 +169,27 @@
         height: 1px; 
         transform: translateY(-50%);
         background-color: #505466;
+    }
+
+    .col-2 {
+        order: 3;
+        flex-grow: 1;
+    }
+
+    .col-3 {
+        padding-left: 0;
+        border: none;
+        order: 2;
+    }
+
+    .col-3::after {
+        content: '';
+        position: absolute;
+        top: 0; 
+        left: 20%;
+        width: 80%;
+        height: 0; 
+        transform: translateY(-50%);
+        background-color: #505466; 
     }
   }

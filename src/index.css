@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 
 body {
   margin: 0;
-  background-image: url("../public/background-1200-crop.png");
-  background-color: #1F2128;
   font-family: "Open Sans";
+  background-color: #1F2128;
+
+  background-image: url("../public/background-1200-crop.png");
   background-size: 100% auto;
-  background-position: top center;
   background-repeat: no-repeat;
+  background-position: top center;
 }

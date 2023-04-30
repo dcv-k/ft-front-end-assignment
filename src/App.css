@@ -13,21 +13,17 @@ nav {
   flex-grow: 0;
 }
 
+.logo {
+  margin-right: 10px;
+  width: 30px;
+}
+
 nav p {
   font-size: 18px;
   line-height: 18px;
   color: #ffffff;
   font-weight: 600;
   font-family: "Open Sans";
-}
-
-.logo {
-  margin-right: 10px;
-  width: 30px;
-}
-
-nav img {
-  width: 50px;
 }
 
 .content {

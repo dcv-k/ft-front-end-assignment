@@ -1,3 +1,4 @@
+import "../tile.css"
 import "./single-weather-tile.css"
 import { formatTime, formatTimeAndDate } from "../../services"
 
