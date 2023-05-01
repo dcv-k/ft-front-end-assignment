@@ -13,7 +13,7 @@ const WeatherDetails = ({ data, handleSingleTile }) => {
         <div className="single-weather-tile">
             <div className={"w-" + data.weather[0].description.split(" ").join("-") + " single-top"}>
                 <div className="back-btn" onClick={handleBackBtnClick}>
-                    <img alt="weather" className="btn-ico" src="back-arrow-invert.png" />
+                    <img alt="weather" className="btn-ico" src="/images/back-arrow-invert.png" />
                 </div>
                 <div className="single-top-content">
                     <div className="single-top-center">
@@ -41,7 +41,7 @@ const WeatherDetails = ({ data, handleSingleTile }) => {
                     <p>Visibility: {(data.visibility / 1000).toFixed(1)}Km</p>
                 </div>
                 <div className="single-col col-2">
-                <img alt="arrow" className="arrow-icon" src="arrowhead-invert.png" />
+                <img alt="arrow" className="arrow-icon" src="/images/arrowhead-invert.png" />
                     <p>{data.wind.speed}Km/s {data.wind.deg}Degree</p>
                 </div>
                 <div className="single-col col-3">
