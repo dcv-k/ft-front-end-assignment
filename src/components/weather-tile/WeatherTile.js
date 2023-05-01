@@ -1,3 +1,4 @@
+import "../tile.css"
 import "./weather-tile.css"
 import { formatTimeAndDate, formatTime } from "../../services"
 
@@ -16,7 +17,7 @@ const WeatherTile = ({ data, handleSingleTile, removeTile }) => {
         <div className="weather-tile" onClick={handleTileClick}>
             <div className={"w-" + data.weather[0].description.split(" ").join("-") + " top"}>
                 <div className="delete-wrap">
-                    <img alt="close" onClick={handleDeleteClick} className="delete-icon" src={"cross.png"} />
+                    <img alt="close" onClick={handleDeleteClick} className="delete-icon" src="/images/cross.png" />
                 </div>
                 <div className="top-content">
                     <div className="top-left">
@@ -41,7 +42,7 @@ const WeatherTile = ({ data, handleSingleTile, removeTile }) => {
                     <p>Visibility: {(data.visibility / 1000).toFixed(1)}Km</p>
                 </div>
                 <div className="col-2">
-                    <img alt="arrow" className="arrow-icon" src="arrowhead-invert.png" />
+                    <img alt="arrow" className="arrow-icon" src="/images/arrowhead-invert.png" />
                     <p>{data.wind.speed} Km/s {data.wind.deg} Degree</p>
                 </div>
                 <div className="col-3">

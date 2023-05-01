@@ -22,12 +22,14 @@ function App() {
 
   useEffect(() => {
 
+    console.log("use Effect")
+
     document.title = "Weather App";
 
     async function fetchData() {
       try {
         // STEP 1: Read city data including cache expire time for each city 
-        const cityDataResponse = await fetch('/cities.json');
+        const cityDataResponse = await fetch('/data/cities.json');
         const cityData = await cityDataResponse.json();
   
         const weatherDataPromises = cityData.List.map(async (city) => {
@@ -65,7 +67,7 @@ function App() {
     <div className="container">
       
       <nav>
-        <img className="logo" src="logo.png" alt="logo"/>
+        <img className="logo" src="/images/logo.png" alt="logo"/>
         <p>Weather App</p>
       </nav>
 
