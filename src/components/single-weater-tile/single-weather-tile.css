@@ -6,6 +6,39 @@
     border-radius: 10px;
 }
 
+[class^="w-"] {
+    background-color: #9c3939;
+}
+
+.w-overcast-clouds {
+    background-color: #388EE7;
+}
+
+.w-few-clouds {
+    background-color: #388EE7;
+}
+
+.w-broken-clouds {
+    
+    background-color: #6249CC;
+}
+
+.w-clear-sky { 
+    background-color: #40B681;
+}
+
+.w-moderate-rain {
+    background-color: #9c3939;  
+}
+
+.w-light-rain {
+    background-color: #DE944E; 
+}
+
+.w-mist {
+    background-color: #9c3939;
+}
+
 .single-top {
     background-size: cover;
     display: flex;

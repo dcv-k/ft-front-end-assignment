@@ -1,6 +1,5 @@
-import "../tile.css"
 import "./weather-tile.css"
-import { formatTimeAndDate, formatTime } from "../../services"
+import { formatTimeAndDate, formatTime } from "../../utils"
 
 const WeatherTile = ({ data, handleSingleTile, removeTile }) => {
     
