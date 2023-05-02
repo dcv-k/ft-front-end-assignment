@@ -1,7 +1,7 @@
 import './App.css';
 import { UNITS } from './constants';
 import { timeToMilliseconds } from './services';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Search from './components/search/Search';
 import WeatherTile from './components/weather-tile/WeatherTile';
 import SingleWeatherTile from './components/single-weater-tile/SingleWeatherTile';
@@ -10,6 +10,7 @@ function App() {
 
   const [weatherData, setWeatherData] = useState([])
   const [singleTileData, setSingleTileData] = useState("")
+  const intervalRef = useRef(null);
 
   const handleSingleTile = (data) => {
     setSingleTileData(data)
@@ -38,14 +39,18 @@ function App() {
           const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
   
           if (cacheCity && Date.now() - cacheCity.cachedTime < timeToMilliseconds(city.ExpTime, city.ExpTimeUnit)) {
-            console.log("loading cache data for: ", city.CityName)
+            
+            console.log("loading cached data for: ", city.CityName)
             return cacheCity.data;
+
           } else {
+
             const weatherDataResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${city.CityCode}&units=${UNITS}&APPID=${process.env.REACT_APP_API_KEY}`);
             const weatherData = await weatherDataResponse.json();
             
             localStorage.setItem(city.CityCode, JSON.stringify({ data: weatherData, cachedTime: Date.now() }));
             console.log("saved new cache data for: ", city.CityName)
+            
             return weatherData;
           }
 
@@ -54,12 +59,31 @@ function App() {
         const weatherData = await Promise.all(weatherDataPromises);
         setWeatherData(weatherData);
 
+        const minExpTime = Math.min(
+          ...cityData.List.map((city) =>
+            timeToMilliseconds(city.ExpTime, city.ExpTimeUnit)
+          )
+        );
+
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+  
+        intervalRef.current = setInterval(() => {
+          console.log("re-fetching data");
+          fetchData();
+        }, minExpTime);
+
       } catch (error) {
         console.error(error);
       }
     }
-  
+
     fetchData();
+
+    return () => {
+      clearInterval(intervalRef.current);
+    };
   }, [])
 
   
