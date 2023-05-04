@@ -14,11 +14,10 @@ const WeatherWidgetContainer = ({ city, removeWidget }) => {
         setWeather(weatherData);
       } else {
         let weatherData = await getWeather(city.CityCode);
-
         weatherData = formatWeatherData(weatherData);
 
-        setWeather(weatherData);
         setCache(city, weatherData);
+        setWeather(weatherData);
       }
     }
 

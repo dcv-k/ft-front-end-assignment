@@ -10,13 +10,7 @@ const Details = ({ weather }) => {
 
   return (
     <div className="single-weather-tile">
-      <div
-        className={
-          "w-" +
-          weather?.weather[0].description.split(" ").join("-") +
-          " single-top"
-        }
-      >
+      <div className={weather.className}>
         <div className="back-btn" onClick={handleBackBtnClick}>
           <img
             alt="weather"
@@ -27,7 +21,7 @@ const Details = ({ weather }) => {
         <div className="single-top-content">
           <div className="single-top-center">
             <p className="single-city">
-              {weather?.name},{weather?.sys.country}
+              {weather.name},{weather.sys.country}
             </p>
             <p>{weather?.dt}</p>
           </div>
@@ -36,21 +30,19 @@ const Details = ({ weather }) => {
               <img
                 alt="weather"
                 className="single-weather-icon"
-                src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`}
+                src={weather.icon}
               />
               <p className="single-weather-description">
-                {weather?.weather[0].description}
+                {weather.description}
               </p>
             </div>
             <div>
-              <p className="single-temperature">
-                {Math.floor(weather?.main.temp)}&deg;c
-              </p>
+              <p className="single-temperature">{weather.main.temp} &deg;c</p>
               <p className="single-temperature-max">
-                Temp Min: {Math.floor(weather?.main.temp_max)}&deg;c
+                Temp Min: {weather.main.temp_max} &deg;c
               </p>
               <p className="single-temperature-min">
-                Temp Max: {Math.floor(weather?.main.temp_min)}&deg;c
+                Temp Max: {weather.main.temp_min} &deg;c
               </p>
             </div>
           </div>
@@ -60,21 +52,21 @@ const Details = ({ weather }) => {
         <div className="single-col col-1">
           <p>Pressure: {weather?.main.pressure}hPa</p>
           <p>Humidity: {weather?.main.humidity}%</p>
-          <p>Visibility: {(weather?.visibility / 1000).toFixed(1)}Km</p>
+          <p>Visibility: {weather.visibility}Km</p>
         </div>
         <div className="single-col col-2">
           <img
             alt="arrow"
             className="arrow-icon"
-            src="/images/arrowhead-invert.png"
+            src={weather.arrowHeadImage}
           />
           <p>
-            {weather?.wind.speed}Km/s {weather?.wind.deg}Degree
+            {weather.wind.speed}Km/s {weather.wind.deg}Degree
           </p>
         </div>
         <div className="single-col col-3">
-          <p>Sunrise: {weather?.sys.sunrise}</p>
-          <p>Sunset: {weather?.sys.sunset}</p>
+          <p>Sunrise: {weather.sys.sunrise}</p>
+          <p>Sunset: {weather.sys.sunset}</p>
         </div>
       </div>
     </div>

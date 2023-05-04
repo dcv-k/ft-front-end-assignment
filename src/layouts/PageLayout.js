@@ -1,13 +1,12 @@
 import Search from "components/search/Search";
 import { Outlet } from "react-router-dom";
-import ErrorBoundary from "../utils/ErrorBoundary";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const PageLayout = () => {
   document.title = "Weather App";
 
   return (
     <div className="container">
-      {/* change nav to section */}
       <nav>
         <img className="logo" src="/images/logo.png" alt="logo" />
         <p>Weather App</p>

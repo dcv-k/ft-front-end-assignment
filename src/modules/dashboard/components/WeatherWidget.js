@@ -14,17 +14,13 @@ const WeatherWidget = ({ weather, removeWidget }) => {
 
   return (
     <div className="weather-tile" onClick={handleClick}>
-      <div
-        className={
-          "w-" + weather.weather[0].description.split(" ").join("-") + " top"
-        }
-      >
+      <div className={weather.className}>
         <div className="delete-wrap">
           <img
             alt="close"
             onClick={handleDeleteClick}
             className="delete-icon"
-            src="/images/cross.png"
+            src={weather.crossImage}
           />
         </div>
         <div className="top-content">
@@ -34,25 +30,17 @@ const WeatherWidget = ({ weather, removeWidget }) => {
             </p>
             <p>{weather.dt}</p>
             <div className="description-wrap">
-              <img
-                alt="weather"
-                className="weather-icon"
-                src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
-              />
-              <p className="weather-description">
-                {weather.weather[0].description}
-              </p>
+              <img alt="weather" className="weather-icon" src={weather.icon} />
+              <p className="weather-description">{weather.description}</p>
             </div>
           </div>
           <div>
-            <p className="temperature">
-              {Math.floor(weather.main.temp)} &deg;c
-            </p>
+            <p className="temperature">{weather.main.temp} &deg;c</p>
             <p className="temperature-min">
-              Temp Min: {Math.floor(weather.main.temp_max)} &deg;c
+              Temp Min: {weather.main.temp_max} &deg;c
             </p>
             <p className="temperature-max">
-              Temp Max: {Math.floor(weather.main.temp_min)} &deg;c
+              Temp Max: {weather.main.temp_min} &deg;c
             </p>
           </div>
         </div>
@@ -61,13 +49,13 @@ const WeatherWidget = ({ weather, removeWidget }) => {
         <div className="col-1">
           <p>Pressure: {weather.main.pressure}hPa</p>
           <p>Humidity: {weather.main.humidity}%</p>
-          <p>Visibility: {(weather.visibility / 1000).toFixed(1)}Km</p>
+          <p>Visibility: {weather.visibility}Km</p>
         </div>
         <div className="col-2">
           <img
             alt="arrow"
             className="arrow-icon"
-            src="/images/arrowhead-invert.png"
+            src={weather.arrowHeadImage}
           />
           <p>
             {weather.wind.speed} Km/s {weather.wind.deg} Degree
