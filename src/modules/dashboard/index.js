@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getCities } from "./api/getCities";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
 
+// eslint-disable-next-line
 export default function () {
   const [cities, setCities] = useState(null);
 

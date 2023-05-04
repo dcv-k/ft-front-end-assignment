@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "../styles/WeatherWidget.css";
 import { useNavigate } from "react-router-dom";
 

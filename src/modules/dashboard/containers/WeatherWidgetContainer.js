@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { getWeather } from "api/getWeather";
-import { formatTimeAndDate } from "utils/formatDateAndTime";
-import { formatTime } from "utils/formatTime";
 import { getCache, setCache } from "utils/handleCache";
 import WeatherWidget from "../components/WeatherWidget";
+import { formatWeatherData } from "utils/formatWeatherData";
 
 const WeatherWidgetContainer = ({ city, removeWidget }) => {
   const [weather, setWeather] = useState(null);
@@ -11,22 +10,20 @@ const WeatherWidgetContainer = ({ city, removeWidget }) => {
   useEffect(() => {
     async function fetchWeather(city) {
       if (getCache(city)) {
-        const weatherData = await getCache(city);
+        let weatherData = await getCache(city);
         setWeather(weatherData);
       } else {
-        const weatherData = await getWeather(city.CityCode);
+        let weatherData = await getWeather(city.CityCode);
 
-        weatherData.dt = formatTimeAndDate(weatherData.dt);
-        weatherData.sys.sunrise = formatTime(weatherData.sys.sunrise);
-        weatherData.sys.sunset = formatTime(weatherData.sys.sunset);
+        weatherData = formatWeatherData(weatherData);
 
-        setCache(city, weatherData);
         setWeather(weatherData);
+        setCache(city, weatherData);
       }
     }
 
     fetchWeather(city);
-  }, []);
+  });
 
   return (
     <>

@@ -18,7 +18,7 @@ const DetailsContainer = ({ cityCode }) => {
     }
 
     fetchWeather(cityCode);
-  }, []);
+  });
 
   return <>{weather && <Details weather={weather} />}</>;
 };
