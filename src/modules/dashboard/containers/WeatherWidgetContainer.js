@@ -4,7 +4,7 @@ import { getCache, setCache } from "utils/handleCache";
 import WeatherWidget from "../components/WeatherWidget";
 import { formatWeatherData } from "utils/formatWeatherData";
 
-const WeatherWidgetContainer = ({ city, removeWidget }) => {
+const WeatherWidgetContainer = ({ city }) => {
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
@@ -24,13 +24,7 @@ const WeatherWidgetContainer = ({ city, removeWidget }) => {
     fetchWeather(city);
   });
 
-  return (
-    <>
-      {weather && (
-        <WeatherWidget weather={weather} removeWidget={removeWidget} />
-      )}
-    </>
-  );
+  return <>{weather && <WeatherWidget weather={weather} />}</>;
 };
 
 export default WeatherWidgetContainer;

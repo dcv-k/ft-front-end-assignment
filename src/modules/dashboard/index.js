@@ -1,20 +1,18 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { getCities } from "./api/getCities";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
+
+export const WeatherWidgetContext = createContext();
 
 // eslint-disable-next-line
 export default function () {
   const [cities, setCities] = useState(null);
 
-  const removeWidget = (event, id) => {
-    setCities(cities.filter((obj) => obj.CityCode !== id));
-    event.stopPropagation();
-  };
-
   useEffect(() => {
+    console.log("use");
     const fetchCities = async () => {
-      const cities = await getCities();
-      setCities(cities.List);
+      const { List } = await getCities();
+      setCities(List);
     };
     fetchCities();
   }, []);
@@ -23,11 +21,9 @@ export default function () {
     <>
       {cities &&
         cities.map((city, index) => (
-          <WeatherWidgetContainer
-            key={index}
-            city={city}
-            removeWidget={removeWidget}
-          />
+          <WeatherWidgetContext.Provider value={{ cities, setCities }}>
+            <WeatherWidgetContainer key={index} city={city} />
+          </WeatherWidgetContext.Provider>
         ))}
     </>
   );

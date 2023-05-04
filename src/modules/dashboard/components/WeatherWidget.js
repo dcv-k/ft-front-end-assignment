@@ -1,15 +1,19 @@
+import { useContext } from "react";
 import "../styles/WeatherWidget.css";
 import { useNavigate } from "react-router-dom";
+import { WeatherWidgetContext } from "..";
 
-const WeatherWidget = ({ weather, removeWidget }) => {
+const WeatherWidget = ({ weather }) => {
   const navigate = useNavigate();
+  const { cities, setCities } = useContext(WeatherWidgetContext);
 
   function handleClick() {
     navigate(`/${weather.id}`);
   }
 
   function handleDeleteClick(e) {
-    removeWidget(e, weather.id);
+    // setCities(cities.filter((obj) => obj.CityCode !== weather.id));
+    e.stopPropagation();
   }
 
   return (
