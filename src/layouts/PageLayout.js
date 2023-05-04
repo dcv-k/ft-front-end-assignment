@@ -1,11 +1,13 @@
 import Search from "components/search/Search";
 import { Outlet } from "react-router-dom";
+import ErrorBoundary from "../utils/ErrorBoundary";
 
 const PageLayout = () => {
   document.title = "Weather App";
 
   return (
     <div className="container">
+      {/* change nav to section */}
       <nav>
         <img className="logo" src="/images/logo.png" alt="logo" />
         <p>Weather App</p>
@@ -17,7 +19,9 @@ const PageLayout = () => {
 
       <div className="content">
         <section className="tiles">
-          <Outlet />
+          <ErrorBoundary fallback={<h1>Something went wrong!</h1>}>
+            <Outlet />
+          </ErrorBoundary>
         </section>
       </div>
 
