@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import "../styles/WeatherWidget.css";
+import "./WeatherWidget.css";
 import { useNavigate } from "react-router-dom";
 import { WeatherWidgetContext } from "..";
 
@@ -18,7 +18,7 @@ const WeatherWidget = ({ weather }) => {
 
   return (
     <div className="weather-tile" onClick={handleClick}>
-      <div className={weather.className}>
+      <div className={weather.className + " top"}>
         <div className="delete-wrap">
           <img
             alt="close"

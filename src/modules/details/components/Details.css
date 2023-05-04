@@ -160,17 +160,17 @@
         font-weight: bold;
     }
 
-    .top-content {
+    .single-top-content {
         flex-direction: column;
         justify-content: center;
     }
 
-    .col-2 {
+    .single-col .col-2 {
         order: 3;
         flex-grow: 1;
     }
 
-    .col-3 {
+    .single-col .col-3 {
         border: none;
         order: 2;
     }

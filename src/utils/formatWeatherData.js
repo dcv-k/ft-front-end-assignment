@@ -14,7 +14,7 @@ export const formatWeatherData = (weatherData) => {
   weatherData.main.temp_min = Math.floor(weatherData.main.temp_min);
   weatherData.visibility = (weatherData.visibility / 1000).toFixed(1);
   weatherData.className =
-    "w-" + weatherData.weather[0].description.split(" ").join("-") + " top";
+    "w-" + weatherData.weather[0].description.split(" ").join("-");
   weatherData.crossImage = IMG_URL_CROSS;
   weatherData.arrowHeadImage = IMG_URL_ARROWHEAD;
   return weatherData;

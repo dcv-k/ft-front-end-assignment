@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "../styles/Details.css";
+import "./Details.css";
 
 const Details = ({ weather }) => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const Details = ({ weather }) => {
 
   return (
     <div className="single-weather-tile">
-      <div className={weather.className}>
+      <div className={weather.className + " single-top"}>
         <div className="back-btn" onClick={handleBackBtnClick}>
           <img
             alt="weather"
