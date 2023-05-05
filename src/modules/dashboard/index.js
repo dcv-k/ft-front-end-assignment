@@ -9,7 +9,6 @@ export default function () {
   const [cities, setCities] = useState(null);
 
   useEffect(() => {
-    console.log("use");
     const fetchCities = async () => {
       const { List } = await getCities();
       setCities(List);
