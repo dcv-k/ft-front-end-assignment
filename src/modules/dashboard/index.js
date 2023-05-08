@@ -1,8 +1,9 @@
+import { ErrorBoundary } from "react-error-boundary";
 import { createContext, useEffect, useState } from "react";
+
 import { getCities } from "./api/getCities";
-import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
-import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "components/error/ErrorFallback";
+import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
 
 export const WeatherWidgetContext = createContext();
 

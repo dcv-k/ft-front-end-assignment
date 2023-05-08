@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
+
 import { getWeather } from "api/getWeather";
 import Details from "../components/Details";
-import { useEffect, useState } from "react";
 import { formatWeatherData } from "utils/formatWeatherData";
-import { useErrorBoundary } from "react-error-boundary";
 
 const DetailsContainer = ({ cityCode }) => {
   const [weather, setWeather] = useState(null);

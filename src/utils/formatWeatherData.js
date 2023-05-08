@@ -5,7 +5,7 @@ import { API_PROVIDER, PATH_CROSS, PATH_ARROWHEAD, PATH_BACK } from "config";
 export const formatWeatherData = ({
   id,
   name,
-  country,
+  sys: { country },
   dt,
   weather,
   sys,
