@@ -1,21 +1,38 @@
 import { formatTimeAndDate } from "./formatDateAndTime";
 import { formatTime } from "./formatTime";
-import { API_BASE_URL, IMG_URL_CROSS, IMG_URL_ARROWHEAD } from "config";
+import { API_PROVIDER, PATH_CROSS, PATH_ARROWHEAD, PATH_BACK } from "config";
 
-export const formatWeatherData = (weatherData) => {
-  //create new object with only necessary properties
-  weatherData.dt = formatTimeAndDate(weatherData.dt);
-  weatherData.sys.sunrise = formatTime(weatherData.sys.sunrise);
-  weatherData.sys.sunset = formatTime(weatherData.sys.sunset);
-  weatherData.icon = `${API_BASE_URL}/img/wn/${weatherData.weather[0].icon}.png`;
-  weatherData.description = weatherData.weather[0].description;
-  weatherData.main.temp = Math.floor(weatherData.main.temp);
-  weatherData.main.temp_max = Math.floor(weatherData.main.temp_max);
-  weatherData.main.temp_min = Math.floor(weatherData.main.temp_min);
-  weatherData.visibility = (weatherData.visibility / 1000).toFixed(1);
-  weatherData.className =
-    "w-" + weatherData.weather[0].description.split(" ").join("-");
-  weatherData.crossImage = IMG_URL_CROSS;
-  weatherData.arrowHeadImage = IMG_URL_ARROWHEAD;
-  return weatherData;
+export const formatWeatherData = ({
+  id,
+  name,
+  country,
+  dt,
+  weather,
+  sys,
+  main: { temp, temp_min, temp_max, pressure, humidity },
+  visibility,
+  wind: { speed, deg },
+}) => {
+  return {
+    id,
+    color: `w-${weather[0].description.split(" ").join("-")}`,
+    name,
+    country,
+    dateTime: formatTimeAndDate(dt),
+    description: weather[0].description,
+    sunrise: formatTime(sys.sunrise),
+    sunset: formatTime(sys.sunset),
+    icon: `${API_PROVIDER}/img/wn/${weather[0].icon}.png`,
+    temperature: Math.floor(temp),
+    maxTemperature: Math.floor(temp_max),
+    minTemperature: Math.floor(temp_min),
+    pressure,
+    humidity,
+    visibility: (visibility / 1000).toFixed(1),
+    speed,
+    degree: deg,
+    cross: PATH_CROSS,
+    arrow: PATH_ARROWHEAD,
+    back: PATH_BACK,
+  };
 };
