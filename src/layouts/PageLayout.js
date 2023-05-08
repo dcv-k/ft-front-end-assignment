@@ -1,6 +1,5 @@
 import Search from "components/search/Search";
 import { Outlet } from "react-router-dom";
-import ErrorBoundary from "../components/ErrorBoundary";
 
 const PageLayout = () => {
   document.title = "Weather App";
@@ -18,9 +17,7 @@ const PageLayout = () => {
 
       <div className="content">
         <section className="tiles">
-          <ErrorBoundary fallback={<h1>Something went wrong!</h1>}>
-            <Outlet />
-          </ErrorBoundary>
+          <Outlet />
         </section>
       </div>
 

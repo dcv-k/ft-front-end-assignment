@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { getCities } from "./api/getCities";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
+import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "components/error/ErrorFallback";
 
 export const WeatherWidgetContext = createContext();
 
@@ -10,20 +12,25 @@ export default function () {
 
   useEffect(() => {
     const fetchCities = async () => {
-      const { List } = await getCities();
-      setCities(List);
+      try {
+        const { List } = await getCities();
+        setCities(List);
+      } catch (error) {}
     };
     fetchCities();
   }, []);
 
   return (
-    <>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
       {cities &&
-        cities.map((city, index) => (
-          <WeatherWidgetContext.Provider value={{ cities, setCities }}>
-            <WeatherWidgetContainer key={index} city={city} />
+        cities.map((city) => (
+          <WeatherWidgetContext.Provider
+            key={city.CityCode}
+            value={{ cities, setCities }}
+          >
+            <WeatherWidgetContainer city={city} />
           </WeatherWidgetContext.Provider>
         ))}
-    </>
+    </ErrorBoundary>
   );
 }

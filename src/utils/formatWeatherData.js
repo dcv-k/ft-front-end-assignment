@@ -1,6 +1,6 @@
 import { formatTimeAndDate } from "./formatDateAndTime";
 import { formatTime } from "./formatTime";
-import { API_BASE_URL, IMG_URL_CROSS, IMG_URL_ARROWHEAD } from "config";
+import { API_PROVIDER, PATH_CROSS, PATH_ARROWHEAD, PATH_BACK } from "config";
 
 export const formatWeatherData = ({
   id,
@@ -18,11 +18,11 @@ export const formatWeatherData = ({
     color: `w-${weather[0].description.split(" ").join("-")}`,
     name,
     country,
-    time: formatTimeAndDate(dt),
+    dateTime: formatTimeAndDate(dt),
     description: weather[0].description,
     sunrise: formatTime(sys.sunrise),
     sunset: formatTime(sys.sunset),
-    icon: `${API_BASE_URL}/img/wn/${weather[0].icon}.png`,
+    icon: `${API_PROVIDER}/img/wn/${weather[0].icon}.png`,
     temperature: Math.floor(temp),
     maxTemperature: Math.floor(temp_max),
     minTemperature: Math.floor(temp_min),
@@ -31,7 +31,8 @@ export const formatWeatherData = ({
     visibility: (visibility / 1000).toFixed(1),
     speed,
     degree: deg,
-    cross: IMG_URL_CROSS,
-    arrow: IMG_URL_ARROWHEAD,
+    cross: PATH_CROSS,
+    arrow: PATH_ARROWHEAD,
+    back: PATH_BACK,
   };
 };

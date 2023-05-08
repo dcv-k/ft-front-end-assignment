@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import "./WeatherWidget.css";
 import { useNavigate } from "react-router-dom";
 import { WeatherWidgetContext } from "..";
@@ -7,67 +7,83 @@ const WeatherWidget = ({ weather }) => {
   const navigate = useNavigate();
   const { cities, setCities } = useContext(WeatherWidgetContext);
 
+  const {
+    id,
+    color,
+    name,
+    country,
+    dateTime,
+    icon,
+    description,
+    temperature,
+    minTemperature,
+    maxTemperature,
+    humidity,
+    pressure,
+    visibility,
+    speed,
+    degree,
+    sunrise,
+    sunset,
+    cross,
+    arrow,
+  } = weather;
+
   function handleClick() {
-    navigate(`/${weather.id}`);
+    navigate(`/${id}`);
   }
 
   function handleDeleteClick(e) {
-    // setCities(cities.filter((obj) => obj.CityCode !== weather.id));
+    setCities(cities.filter(({ CityCode }) => CityCode !== String(id)));
     e.stopPropagation();
   }
 
+  useEffect(() => {}, [cities]);
+
   return (
     <div className="weather-tile" onClick={handleClick}>
-      <div className={weather.className + " top"}>
+      <div className={color + " top"}>
         <div className="delete-wrap">
           <img
             alt="close"
             onClick={handleDeleteClick}
             className="delete-icon"
-            src={weather.crossImage}
+            src={cross}
           />
         </div>
         <div className="top-content">
           <div className="top-left">
             <p className="city">
-              {weather.name},{weather.sys.country}
+              {name},{country}
             </p>
-            <p>{weather.dt}</p>
+            <p>{dateTime}</p>
             <div className="description-wrap">
-              <img alt="weather" className="weather-icon" src={weather.icon} />
-              <p className="weather-description">{weather.description}</p>
+              <img alt="weather" className="weather-icon" src={icon} />
+              <p className="weather-description">{description}</p>
             </div>
           </div>
           <div>
-            <p className="temperature">{weather.main.temp} &deg;c</p>
-            <p className="temperature-min">
-              Temp Min: {weather.main.temp_max} &deg;c
-            </p>
-            <p className="temperature-max">
-              Temp Max: {weather.main.temp_min} &deg;c
-            </p>
+            <p className="temperature">{temperature} &deg;c</p>
+            <p className="temperature-min">Temp Min: {minTemperature} &deg;c</p>
+            <p className="temperature-max">Temp Max: {maxTemperature} &deg;c</p>
           </div>
         </div>
       </div>
       <div className="bottom">
         <div className="col-1">
-          <p>Pressure: {weather.main.pressure}hPa</p>
-          <p>Humidity: {weather.main.humidity}%</p>
-          <p>Visibility: {weather.visibility}Km</p>
+          <p>Pressure: {pressure}hPa</p>
+          <p>Humidity: {humidity}%</p>
+          <p>Visibility: {visibility}Km</p>
         </div>
         <div className="col-2">
-          <img
-            alt="arrow"
-            className="arrow-icon"
-            src={weather.arrowHeadImage}
-          />
+          <img alt="arrow" className="arrow-icon" src={arrow} />
           <p>
-            {weather.wind.speed} Km/s {weather.wind.deg} Degree
+            {speed} Km/s {degree} Degree
           </p>
         </div>
         <div className="col-3">
-          <p>Sunrise: {weather.sys.sunrise}</p>
-          <p>Sunset: {weather.sys.sunset}</p>
+          <p>Sunrise: {sunrise}</p>
+          <p>Sunset: {sunset}</p>
         </div>
       </div>
     </div>
