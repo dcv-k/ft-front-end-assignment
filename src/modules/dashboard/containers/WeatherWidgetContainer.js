@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
+import { useErrorBoundary } from "react-error-boundary";
 
 import { getWeather } from "api/getWeather";
 import { getCache, setCache } from "utils/handleCache";
 import WeatherWidget from "../components/WeatherWidget";
-import ErrorFallback from "components/error/ErrorFallback";
 import { formatWeatherData } from "utils/formatWeatherData";
 
 const WeatherWidgetContainer = ({ city }) => {
@@ -39,11 +38,7 @@ const WeatherWidgetContainer = ({ city }) => {
     fetchWeather(city);
   }, []);
 
-  return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
-      {weather && <WeatherWidget weather={weather} />}
-    </ErrorBoundary>
-  );
+  return <>{weather && <WeatherWidget weather={weather} />}</>;
 };
 
 export default WeatherWidgetContainer;

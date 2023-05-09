@@ -2,7 +2,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import { createContext, useEffect, useState } from "react";
 
 import { getCities } from "./api/getCities";
-import ErrorFallback from "components/error/ErrorFallback";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
 import JSONError from "components/error/JSONError";
 
@@ -17,22 +16,26 @@ export default function () {
       try {
         const { List } = await getCities();
         setCities(List);
-      } catch (error) {}
+      } catch (error) {
+        console.log("error");
+      }
     };
     fetchCities();
   }, []);
 
   return (
-    <ErrorBoundary FallbackComponent={JSONError}>
+    <>
       {cities &&
         cities.map((city) => (
-          <WeatherWidgetContext.Provider
-            key={city.CityCode}
-            value={{ cities, setCities }}
-          >
-            <WeatherWidgetContainer city={city} />
-          </WeatherWidgetContext.Provider>
+          <ErrorBoundary FallbackComponent={JSONError}>
+            <WeatherWidgetContext.Provider
+              key={city.CityCode}
+              value={{ cities, setCities }}
+            >
+              <WeatherWidgetContainer city={city} />
+            </WeatherWidgetContext.Provider>
+          </ErrorBoundary>
         ))}
-    </ErrorBoundary>
+    </>
   );
 }
