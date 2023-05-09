@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { getCities } from "./api/getCities";
 import ErrorFallback from "components/error/ErrorFallback";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
+import JSONError from "components/error/JSONError";
 
 export const WeatherWidgetContext = createContext();
 
@@ -22,7 +23,7 @@ export default function () {
   }, []);
 
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <ErrorBoundary FallbackComponent={JSONError}>
       {cities &&
         cities.map((city) => (
           <WeatherWidgetContext.Provider
