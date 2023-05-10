@@ -3,7 +3,7 @@ import { API_URL, LOCAL_URL } from "../config";
 const local = {
   get: async (url, options) => {
     const response = await fetch(LOCAL_URL + url, options);
-    if (response.ok) {
+    if (!response.ok) {
       throw new Error(
         `Error fetching data from JSON file: Error status - ${response.status}`
       );

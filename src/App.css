@@ -30,7 +30,7 @@ nav p {
   flex-grow: 1;
 }
 
-.tiles {
+.widgets {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

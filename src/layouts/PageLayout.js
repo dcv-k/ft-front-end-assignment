@@ -1,7 +1,8 @@
-import ErrorJSON from "components/error/ErrorJSON";
-import Search from "components/search/Search";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
+
+import ErrorJSON from "components/error/ErrorJSON";
+import Search from "components/search/Search";
 
 const PageLayout = () => {
   document.title = "Weather App";
@@ -18,7 +19,7 @@ const PageLayout = () => {
       </section>
 
       <div className="content">
-        <section className="tiles">
+        <section className="widgets">
           <ErrorBoundary FallbackComponent={ErrorJSON}>
             <Outlet />
           </ErrorBoundary>

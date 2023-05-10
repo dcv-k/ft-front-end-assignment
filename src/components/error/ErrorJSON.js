@@ -1,12 +1,11 @@
 import "./error.css";
 
-const ErrorJSON = ({ error, resetErrorBoundary }) => {
+const ErrorAPI = ({ error, resetErrorBoundary }) => {
   return (
     <div className="error-wrap">
       <div className="error">
-        <div className="error-header">JSON Error</div>
-        <div className="error-body">
-          <div className="error-body-top">
+        <div className="error-top">
+          <div className="error-heading">
             <img
               className="icon-error"
               src="/images/error-solid-96.png"
@@ -16,8 +15,9 @@ const ErrorJSON = ({ error, resetErrorBoundary }) => {
           </div>
 
           <p className="error-message">{error.message}</p>
-
-          <div className="btn-wrap" onClick={resetErrorBoundary}>
+        </div>
+        <div className="error-bottom">
+          <div className="retry-btn-wrap" onClick={resetErrorBoundary}>
             <img
               className="icon-reset"
               src="/images/reset-48.png"
@@ -31,4 +31,4 @@ const ErrorJSON = ({ error, resetErrorBoundary }) => {
   );
 };
 
-export default ErrorJSON;
+export default ErrorAPI;

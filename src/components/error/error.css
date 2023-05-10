@@ -7,30 +7,45 @@
   
   .error {
     width: 430px; 
+    min-height: 282px;
     margin: 30px;
-    border-radius: 10px;
-    background-color: #383B47;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #333;
+    align-self: stretch;
   }
-  
-  .error-header {
-    font-size: 20px;
-    font-weight: bold;
-    color: #dcdcdc;
-    background-color: #9c3939;
-    padding: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+
+  .error-top {
+    background-image: url("../../../public/images/cloud.png");
+    padding-left: 30px;
+    padding-right: 30px;
+    min-height: 173px;
+    background-size: cover;
+    background-repeat: no-repeat; 
   }
-  
-  .error-body {
-    padding: 20px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+
+  .error-heading {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .error-heading p {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: 1px;
+    color: #ffff;
+  }
+
+  .error-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 99px;
+    padding: 5px 20px 5px 20px;
+    background-color: #383B47;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 
   .icon-error {
@@ -53,10 +68,9 @@
     font-size: 16px;
     color: #dcdcdc;
     margin: 0;
-    margin-bottom: 12px;
   }
 
-  .btn-wrap {
+  .retry-btn-wrap {
     padding: 5px 10px;
     background-color: #9c3939;
     color: #dcdcdc;
