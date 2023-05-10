@@ -10,6 +10,7 @@ const DetailsContainer = ({ cityCode }) => {
   const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
+    console.log("use");
     async function fetchWeather(cityCode) {
       try {
         let weatherData = await getWeather(cityCode);
@@ -22,7 +23,7 @@ const DetailsContainer = ({ cityCode }) => {
     }
 
     fetchWeather(cityCode);
-  });
+  }, []);
 
   return <>{weather && <Details weather={weather} />}</>;
 };
