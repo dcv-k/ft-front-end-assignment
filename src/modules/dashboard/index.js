@@ -1,15 +1,16 @@
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
 import { createContext, useEffect, useState } from "react";
 
 import { getCities } from "./api/getCities";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
-import JSONError from "components/error/JSONError";
+import ErrorAPI from "components/error/ErrorAPI";
 
 export const WeatherWidgetContext = createContext();
 
 // eslint-disable-next-line
 export default function () {
   const [cities, setCities] = useState(null);
+  const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -17,7 +18,7 @@ export default function () {
         const { List } = await getCities();
         setCities(List);
       } catch (error) {
-        console.log("error");
+        showBoundary(error);
       }
     };
     fetchCities();
@@ -27,7 +28,7 @@ export default function () {
     <>
       {cities &&
         cities.map((city) => (
-          <ErrorBoundary FallbackComponent={JSONError}>
+          <ErrorBoundary FallbackComponent={ErrorAPI}>
             <WeatherWidgetContext.Provider
               key={city.CityCode}
               value={{ cities, setCities }}
