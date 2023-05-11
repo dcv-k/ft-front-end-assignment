@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { getCities } from "./api/getCities";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
-import WidgetAPI from "components/error/WidgetAPI";
+import ErrorAPI from "./components/ErrorAPI/ErrorAPI";
 
 export const WeatherWidgetContext = createContext();
 
@@ -28,7 +28,7 @@ export default function () {
     <>
       {cities &&
         cities.map((city) => (
-          <ErrorBoundary FallbackComponent={WidgetAPI}>
+          <ErrorBoundary FallbackComponent={ErrorAPI}>
             <WeatherWidgetContext.Provider
               key={city.CityCode}
               value={{ cities, setCities }}

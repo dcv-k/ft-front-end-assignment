@@ -1,3 +1,5 @@
+import "./DetailsAPI.css";
+
 const DetailsAPI = ({ error, resetErrorBoundary }) => {
   return (
     <div className="details__error">

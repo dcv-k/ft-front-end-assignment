@@ -1,7 +1,8 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { WeatherWidgetContext } from "..";
+import "./WeatherWidget.css";
+import { WeatherWidgetContext } from "modules/dashboard";
 
 const WeatherWidget = ({ weather }) => {
   const navigate = useNavigate();

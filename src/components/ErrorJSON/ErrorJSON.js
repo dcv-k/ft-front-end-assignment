@@ -1,6 +1,8 @@
-const ErrorAPI = ({ error, resetErrorBoundary }) => {
+import "./ErrorJSON.css";
+
+const ErrorJSON = ({ error, resetErrorBoundary }) => {
   return (
-    <div className="widget__error">
+    <div className="widget-error">
       <div className="top">
         <div className="heading">
           <img
@@ -27,4 +29,4 @@ const ErrorAPI = ({ error, resetErrorBoundary }) => {
   );
 };
 
-export default ErrorAPI;
+export default ErrorJSON;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 
-import { getWeather } from "api/getWeather";
+import { getWeather } from "api-handlers/getWeather";
 import { getCache, setCache } from "utils/handleCache";
-import WeatherWidget from "../components/WeatherWidget";
+import WeatherWidget from "../components/WeatherWidget/WeatherWidget";
 import { formatWeatherData } from "utils/formatWeatherData";
 
 const WeatherWidgetContainer = ({ city }) => {

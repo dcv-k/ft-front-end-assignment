@@ -1,6 +1,6 @@
 import { formatTimeAndDate } from "./formatDateAndTime";
 import { formatTime } from "./formatTime";
-import { API_PROVIDER, PATH_CROSS, PATH_ARROWHEAD, PATH_BACK } from "config";
+import { API_PROVIDER, PATH_CROSS, PATH_ARROWHEAD, PATH_BACK } from "constants";
 
 export const formatWeatherData = ({
   id,

@@ -1,3 +1,5 @@
+import "./ErrorAPI.css";
+
 const ErrorAPI = ({ error, resetErrorBoundary }) => {
   return (
     <div className="widget-error">
