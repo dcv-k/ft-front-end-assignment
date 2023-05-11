@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 
-import { getWeather } from "api-handlers/getWeather";
+import { getWeather } from "api/getWeather";
 import { formatWeatherData } from "utils/formatWeatherData";
 import Details from "../components/Details/Details";
 
