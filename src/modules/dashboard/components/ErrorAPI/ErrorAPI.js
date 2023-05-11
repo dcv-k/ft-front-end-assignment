@@ -12,7 +12,7 @@ const ErrorAPI = ({ error, resetErrorBoundary }) => {
           ></img>
           <p>Request Failed!</p>
         </div>
-        <p className="message">request failed while making api call</p>
+        <p className="message">Request failed while making api call</p>
         <p className="message">{error.message}</p>
       </div>
       <div className="bottom">
