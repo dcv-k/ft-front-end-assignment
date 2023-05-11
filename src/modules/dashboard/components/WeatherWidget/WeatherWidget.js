@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./WeatherWidget.css";
-import { WeatherWidgetContext } from "..";
+import { WeatherWidgetContext } from "modules/dashboard";
 
 const WeatherWidget = ({ weather }) => {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ const WeatherWidget = ({ weather }) => {
     navigate(`/${id}`);
   }
 
-  function handleDeleteClick(e) {
+  function handleRemoveClick(e) {
     setCities(cities.filter(({ CityCode }) => CityCode !== String(id)));
     e.stopPropagation();
   }
@@ -42,28 +42,28 @@ const WeatherWidget = ({ weather }) => {
   useEffect(() => {}, [cities]);
 
   return (
-    <div className="weather-tile" onClick={handleClick}>
+    <div className="weather-widget" onClick={handleClick}>
       <div className={color + " top"}>
-        <div className="delete-wrap">
+        <div className="remove">
           <img
             alt="close"
-            onClick={handleDeleteClick}
-            className="delete-icon"
+            onClick={handleRemoveClick}
+            className="icon--cross"
             src={cross}
           />
         </div>
-        <div className="top-content">
-          <div className="top-left">
+        <div className="content">
+          <div className="left">
             <p className="city">
               {name},{country}
             </p>
             <p>{dateTime}</p>
-            <div className="description-wrap">
-              <img alt="weather" className="weather-icon" src={icon} />
-              <p className="weather-description">{description}</p>
+            <div className="description">
+              <img alt="weather" className="icon--weather" src={icon} />
+              <p className="description__text">{description}</p>
             </div>
           </div>
-          <div>
+          <div className="right">
             <p className="temperature">{temperature} &deg;c</p>
             <p className="temperature-min">Temp Min: {minTemperature} &deg;c</p>
             <p className="temperature-max">Temp Max: {maxTemperature} &deg;c</p>
@@ -71,18 +71,18 @@ const WeatherWidget = ({ weather }) => {
         </div>
       </div>
       <div className="bottom">
-        <div className="col-1">
+        <div className="left">
           <p>Pressure: {pressure}hPa</p>
           <p>Humidity: {humidity}%</p>
           <p>Visibility: {visibility}Km</p>
         </div>
-        <div className="col-2">
-          <img alt="arrow" className="arrow-icon" src={arrow} />
+        <div className="center">
+          <img alt="arrow" className="icon--arrow" src={arrow} />
           <p>
             {speed} Km/s {degree} Degree
           </p>
         </div>
-        <div className="col-3">
+        <div className="right">
           <p>Sunrise: {sunrise}</p>
           <p>Sunset: {sunset}</p>
         </div>

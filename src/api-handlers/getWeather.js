@@ -1,6 +1,6 @@
 // import { api } from "lib/axios";
-import { api } from "lib/fetch";
-import { UNITS, API_KEY } from "config";
+import { api } from "api-config/fetch";
+import { UNITS, API_KEY } from "constants";
 
 export const getWeather = async (cityCode) => {
   return await api.get(

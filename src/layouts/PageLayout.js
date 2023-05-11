@@ -1,8 +1,9 @@
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
 
-import ErrorJSON from "components/error/ErrorJSON";
-import Search from "components/search/Search";
+import { PATH_LOGO } from "constants";
+import Search from "components/Search/Search";
+import ErrorJSON from "components/ErrorJSON/ErrorJSON";
 
 const PageLayout = () => {
   document.title = "Weather App";
@@ -10,7 +11,7 @@ const PageLayout = () => {
   return (
     <div className="container">
       <nav>
-        <img className="logo" src="/images/logo.png" alt="logo" />
+        <img className="logo" src={PATH_LOGO} alt="logo" />
         <p>Weather App</p>
       </nav>
 

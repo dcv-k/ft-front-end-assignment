@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 import "./Details.css";
 
 const Details = ({ weather }) => {
@@ -25,53 +26,53 @@ const Details = ({ weather }) => {
     arrow,
   } = weather;
 
-  const handleBackBtnClick = () => {
+  const handleBackClick = () => {
     navigate("/");
   };
 
   return (
-    <div className="single-weather-tile">
-      <div className={color + " single-top"}>
-        <div className="back-btn" onClick={handleBackBtnClick}>
-          <img alt="weather" className="btn-ico" src={back} />
+    <div className="weather-details">
+      <div className={color + " top"}>
+        <div className="btn-back" onClick={handleBackClick}>
+          <img alt="weather" className="icon--back" src={back} />
         </div>
-        <div className="single-top-content">
-          <div className="single-top-center">
-            <p className="single-city">
+        <div className="content">
+          <div className="center">
+            <p className="city">
               {name},{country}
             </p>
             <p>{dateTime}</p>
           </div>
-          <div className="single-top-row">
-            <div className="single-description-wrap">
-              <img alt="weather" className="single-weather-icon" src={icon} />
-              <p className="single-weather-description">{description}</p>
+          <div className="row">
+            <div className="left">
+              <img alt="weather" className="icon--weather" src={icon} />
+              <p className="description">{description}</p>
             </div>
-            <div>
-              <p className="single-temperature">{temperature} &deg;c</p>
-              <p className="single-temperature-max">
+            <div className="right">
+              <p className="temperature">{temperature} &deg;c</p>
+              <p className="temperature-max">
                 Temp Min: {minTemperature} &deg;c
               </p>
-              <p className="single-temperature-min">
+              <p className="temperature-min">
                 Temp Max: {maxTemperature} &deg;c
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div className="single-bottom">
-        <div className="single-col col-1">
+      <div className="bottom">
+        <div className="left">
           <p>Pressure: {pressure}hPa</p>
           <p>Humidity: {humidity}%</p>
           <p>Visibility: {visibility}Km</p>
         </div>
-        <div className="single-col col-2">
-          <img alt="arrow" className="arrow-icon" src={arrow} />
+        <div className="center">
+          <img alt="arrow" className="icon--arrow" src={arrow} />
           <p>
             {speed}Km/s {degree}Degree
           </p>
         </div>
-        <div className="single-col col-3">
+        <div className="right">
           <p>Sunrise: {sunrise}</p>
           <p>Sunset: {sunset}</p>
         </div>

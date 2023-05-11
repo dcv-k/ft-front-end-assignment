@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { getCities } from "./api/getCities";
 import WeatherWidgetContainer from "./containers/WeatherWidgetContainer";
-import ErrorAPI from "components/error/ErrorAPI";
+import ErrorAPI from "./components/ErrorAPI/ErrorAPI";
 
 export const WeatherWidgetContext = createContext();
 

@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 
-import { getWeather } from "api/getWeather";
-import Details from "../components/Details";
+import { getWeather } from "api-handlers/getWeather";
 import { formatWeatherData } from "utils/formatWeatherData";
+import Details from "../components/Details/Details";
 
 const DetailsContainer = ({ cityCode }) => {
   const [weather, setWeather] = useState(null);
   const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
+    console.log("use");
     async function fetchWeather(cityCode) {
       try {
         let weatherData = await getWeather(cityCode);
@@ -22,7 +23,7 @@ const DetailsContainer = ({ cityCode }) => {
     }
 
     fetchWeather(cityCode);
-  });
+  }, []);
 
   return <>{weather && <Details weather={weather} />}</>;
 };

@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { API_URL } from "../config";
+import { API_URL } from "../constants";
 
 export const local = Axios.create({
   baseURL: process.env.PUBLIC_URL,
