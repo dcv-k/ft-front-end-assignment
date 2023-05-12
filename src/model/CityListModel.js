@@ -18,7 +18,6 @@ class CityListModel extends React.Component {
     try {
       const { List } = await getCities();
       this.state.cityList = List;
-      this.props.onLoadCityList(List);
     } catch (error) {
       console.log(error);
     }

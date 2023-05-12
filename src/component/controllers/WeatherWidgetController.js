@@ -14,7 +14,6 @@ const WeatherWidgetController = ({ city }) => {
       try {
         const data = new WeatherModel({ city });
         await data.componentDidMount();
-        console.log("w controller", data.state.weather);
         setWeather(data.state.weather);
       } catch (error) {
         console.log("dashboard", error);

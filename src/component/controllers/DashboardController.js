@@ -13,7 +13,6 @@ const DashboardController = () => {
       try {
         const data = new CityListModel();
         await data.componentDidMount();
-        console.log("controller", data.state.cityList);
         setCityList(data.state.cityList);
       } catch (error) {
         console.log("dashboard", error);
