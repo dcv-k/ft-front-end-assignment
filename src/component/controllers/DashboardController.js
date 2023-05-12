@@ -1,8 +1,8 @@
-import Dashboard from "component/views/Dashboard/Dashboard";
-import { CityListModel } from "model/CityListModel";
-
-import { createContext, useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
+import { createContext, useEffect, useState } from "react";
+
+import { CityListModel } from "model/CityListModel";
+import Dashboard from "component/views/Dashboard/Dashboard";
 
 export const CityListContext = createContext();
 

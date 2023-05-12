@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   API_KEY,
   API_PROVIDER,
@@ -6,7 +8,6 @@ import {
   PATH_CROSS,
   UNITS,
 } from "utils/constants";
-import React from "react";
 import { api } from "utils/API";
 
 class WeatherModel extends React.Component {
@@ -110,12 +111,9 @@ class WeatherModel extends React.Component {
     };
 
     if (getCache(this.props.city) && !this.props.fresh) {
-      console.log("from cache");
       let weather = getCache(this.props.city);
       this.state.weather = weather;
     } else {
-      console.log("from api");
-
       let weather = await getWeather(this.props.city.CityCode);
       weather = formatWeatherData(weather);
       setCache(this.props.city, weather);

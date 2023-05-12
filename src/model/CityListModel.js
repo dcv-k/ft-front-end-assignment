@@ -1,6 +1,7 @@
+import React from "react";
+
 import { local } from "utils/API";
 import { PATH_JSON } from "utils/constants";
-import React from "react";
 
 class CityListModel extends React.Component {
   constructor(props) {

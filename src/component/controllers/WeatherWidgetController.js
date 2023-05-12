@@ -1,15 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import WeatherWidget from "component/views/WeatherWidget/WeatherWidget";
 import { useNavigate } from "react-router-dom";
-import { CityListContext } from "component/controllers/DashboardController";
-import { WeatherModel } from "model/WeatherModel";
+import { useContext, useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 
+import { WeatherModel } from "model/WeatherModel";
+import WeatherWidget from "component/views/WeatherWidget/WeatherWidget";
+import { CityListContext } from "component/controllers/DashboardController";
+
 const WeatherWidgetController = ({ city }) => {
-  const [weather, setWeather] = useState(null);
   const navigate = useNavigate();
-  const { cityList, setCityList } = useContext(CityListContext);
   const { showBoundary } = useErrorBoundary();
+
+  const [weather, setWeather] = useState(null);
+  const { cityList, setCityList } = useContext(CityListContext);
 
   useEffect(() => {
     const fetchWeather = async () => {
