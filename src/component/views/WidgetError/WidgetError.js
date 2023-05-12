@@ -1,6 +1,6 @@
-import "./ErrorAPI.css";
+import "./WidgetError.css";
 
-const ErrorAPI = ({ error, resetErrorBoundary }) => {
+const WidgetError = ({ error, resetErrorBoundary }) => {
   return (
     <div className="widget-error">
       <div className="top">
@@ -12,7 +12,6 @@ const ErrorAPI = ({ error, resetErrorBoundary }) => {
           ></img>
           <p>Request Failed!</p>
         </div>
-        <p className="message">Request failed while making api call</p>
         <p className="message">{error.message}</p>
       </div>
       <div className="bottom">
@@ -29,4 +28,4 @@ const ErrorAPI = ({ error, resetErrorBoundary }) => {
   );
 };
 
-export default ErrorAPI;
+export default WidgetError;

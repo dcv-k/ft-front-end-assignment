@@ -1,10 +1,6 @@
-import { useNavigate } from "react-router-dom";
-
 import "./Details.css";
 
-const Details = ({ weather }) => {
-  const navigate = useNavigate();
-
+const Details = ({ weather, handleBackClick }) => {
   const {
     color,
     name,
@@ -25,10 +21,6 @@ const Details = ({ weather }) => {
     back,
     arrow,
   } = weather;
-
-  const handleBackClick = () => {
-    navigate("/");
-  };
 
   return (
     <div className="weather-details">

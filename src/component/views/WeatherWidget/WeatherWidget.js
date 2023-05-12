@@ -1,13 +1,6 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 import "./WeatherWidget.css";
-import { WeatherWidgetContext } from "modules/dashboard";
 
-const WeatherWidget = ({ weather }) => {
-  const navigate = useNavigate();
-  const { cities, setCities } = useContext(WeatherWidgetContext);
-
+const WeatherWidget = ({ weather, handleClick, handleRemoveClick }) => {
   const {
     id,
     color,
@@ -29,17 +22,6 @@ const WeatherWidget = ({ weather }) => {
     cross,
     arrow,
   } = weather;
-
-  function handleClick() {
-    navigate(`/${id}`);
-  }
-
-  function handleRemoveClick(e) {
-    setCities(cities.filter(({ CityCode }) => CityCode !== String(id)));
-    e.stopPropagation();
-  }
-
-  useEffect(() => {}, [cities]);
 
   return (
     <div className="weather-widget" onClick={handleClick}>

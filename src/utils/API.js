@@ -1,6 +1,6 @@
 import { API_URL, LOCAL_URL } from "../constants";
 
-const local = {
+export const local = {
   get: async (url, options) => {
     const response = await fetch(LOCAL_URL + url, options);
     if (!response.ok) {
@@ -13,7 +13,7 @@ const local = {
   },
 };
 
-const api = {
+export const api = {
   get: async (url, options) => {
     const response = await fetch(API_URL + url, options);
     if (!response.ok) {
@@ -25,5 +25,3 @@ const api = {
     return data;
   },
 };
-
-export { local, api };

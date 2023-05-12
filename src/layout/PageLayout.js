@@ -1,9 +1,8 @@
+import WidgetError from "component/views/WidgetError/WidgetError";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";
 
-import { PATH_LOGO } from "constants";
-import Search from "components/Search/Search";
-import ErrorJSON from "components/ErrorJSON/ErrorJSON";
+import { PATH_LOGO } from "utils/constants";
 
 const PageLayout = () => {
   document.title = "Weather App";
@@ -21,7 +20,7 @@ const PageLayout = () => {
 
       <div className="content">
         <section className="widgets">
-          <ErrorBoundary FallbackComponent={ErrorJSON}>
+          <ErrorBoundary FallbackComponent={WidgetError}>
             <Outlet />
           </ErrorBoundary>
         </section>

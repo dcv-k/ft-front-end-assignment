@@ -1,8 +1,8 @@
-import "./DetailsAPI.css";
+import "./DetailsError.css";
 
-const DetailsAPI = ({ error, resetErrorBoundary }) => {
+const DetailsError = ({ error, resetErrorBoundary }) => {
   return (
-    <div className="details__error">
+    <div className="details-error">
       <div className="top">
         <div className="heading">
           <img
@@ -12,7 +12,6 @@ const DetailsAPI = ({ error, resetErrorBoundary }) => {
           ></img>
           <p>Request Failed!</p>
         </div>
-        <p className="message">request failed while making api call</p>
         <p className="message">{error.message}</p>
       </div>
       <div className="bottom">
@@ -29,4 +28,4 @@ const DetailsAPI = ({ error, resetErrorBoundary }) => {
   );
 };
 
-export default DetailsAPI;
+export default DetailsError;
