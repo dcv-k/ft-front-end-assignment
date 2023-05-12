@@ -11,11 +11,7 @@ class CityListModel extends React.Component {
   }
 
   async componentDidMount() {
-    const getCities = async () => {
-      return await local.get(PATH_JSON);
-    };
-
-    const { List } = await getCities();
+    const { List } = await local.get(PATH_JSON);
     this.state.cityList = List;
   }
 
