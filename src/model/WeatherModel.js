@@ -115,14 +115,11 @@ class WeatherModel extends React.Component {
       this.state.weather = weather;
     } else {
       console.log("from api");
-      try {
-        let weather = await getWeather(this.props.city.CityCode);
-        weather = formatWeatherData(weather);
-        setCache(this.props.city, weather);
-        this.state.weather = weather;
-      } catch (error) {
-        console.log("try", error);
-      }
+
+      let weather = await getWeather(this.props.city.CityCode);
+      weather = formatWeatherData(weather);
+      setCache(this.props.city, weather);
+      this.state.weather = weather;
     }
   }
 

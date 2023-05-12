@@ -1,6 +1,7 @@
 import Details from "component/views/Details/Details";
 import { WeatherModel } from "model/WeatherModel";
 import { useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const DetailsController = () => {
@@ -9,6 +10,7 @@ const DetailsController = () => {
 
   const [weather, setWeather] = useState(null);
   const navigate = useNavigate();
+  const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -17,7 +19,7 @@ const DetailsController = () => {
         await data.componentDidMount();
         setWeather(data.state.weather);
       } catch (error) {
-        console.log("dashboard", error);
+        showBoundary(error);
       }
     };
 

@@ -2,11 +2,13 @@ import Dashboard from "component/views/Dashboard/Dashboard";
 import { CityListModel } from "model/CityListModel";
 
 import { createContext, useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 
 export const CityListContext = createContext();
 
 const DashboardController = () => {
   const [cityList, setCityList] = useState(null);
+  const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -15,7 +17,7 @@ const DashboardController = () => {
         await data.componentDidMount();
         setCityList(data.state.cityList);
       } catch (error) {
-        console.log("dashboard", error);
+        showBoundary(error);
       }
     };
 

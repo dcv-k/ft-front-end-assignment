@@ -3,11 +3,13 @@ import WeatherWidget from "component/views/WeatherWidget/WeatherWidget";
 import { useNavigate } from "react-router-dom";
 import { CityListContext } from "component/controllers/DashboardController";
 import { WeatherModel } from "model/WeatherModel";
+import { useErrorBoundary } from "react-error-boundary";
 
 const WeatherWidgetController = ({ city }) => {
   const [weather, setWeather] = useState(null);
   const navigate = useNavigate();
   const { cityList, setCityList } = useContext(CityListContext);
+  const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
     const fetchWeather = async () => {
@@ -16,7 +18,7 @@ const WeatherWidgetController = ({ city }) => {
         await data.componentDidMount();
         setWeather(data.state.weather);
       } catch (error) {
-        console.log("dashboard", error);
+        showBoundary(error);
       }
     };
 
