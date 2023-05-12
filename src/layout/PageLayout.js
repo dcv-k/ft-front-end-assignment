@@ -1,3 +1,4 @@
+import Search from "component/views/Search/Search";
 import WidgetError from "component/views/WidgetError/WidgetError";
 import { ErrorBoundary } from "react-error-boundary";
 import { Outlet } from "react-router-dom";

@@ -1,5 +1,6 @@
 import Dashboard from "component/views/Dashboard/Dashboard";
-import CityListModel from "model/CityListModel";
+import { CityListModel } from "model/CityListModel";
+
 import { createContext, useEffect, useState } from "react";
 
 export const CityListContext = createContext();
@@ -8,10 +9,12 @@ const DashboardController = () => {
   const [cityList, setCityList] = useState(null);
 
   useEffect(() => {
-    const fetchCities = () => {
+    const fetchCities = async () => {
       try {
-        const data = CityListModel();
-        setCityList(data);
+        const data = new CityListModel();
+        await data.componentDidMount();
+        console.log("controller", data.state.cityList);
+        setCityList(data.state.cityList);
       } catch (error) {
         console.log("dashboard", error);
       }
@@ -22,7 +25,7 @@ const DashboardController = () => {
 
   return (
     <>
-      <CityListContext.Provider value={{ cityList }}>
+      <CityListContext.Provider value={{ cityList, setCityList }}>
         {cityList && <Dashboard />}
       </CityListContext.Provider>
     </>

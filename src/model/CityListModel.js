@@ -1,20 +1,32 @@
-import { local } from "config/fetch";
-import { PATH_JSON } from "constants";
-import { useEffect, useState } from "react";
+import { local } from "utils/API";
+import { PATH_JSON } from "utils/constants";
+import React from "react";
 
-export default CityListModel = () => {
-  const [cityList, setCityList] = useState(null);
+class CityListModel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cityList: [],
+    };
+  }
 
-  useEffect(() => {
-    let data = getCities();
-    setCityList(data);
-  }, []);
+  async componentDidMount() {
+    const getCities = async () => {
+      return await local.get(PATH_JSON);
+    };
 
-  return {
-    cityList,
-  };
-};
+    try {
+      const { List } = await getCities();
+      this.state.cityList = List;
+      this.props.onLoadCityList(List);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-const getCities = () => {
-  return local.get(PATH_JSON);
-};
+  render() {
+    return null;
+  }
+}
+
+export { CityListModel };

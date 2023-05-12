@@ -1,4 +1,5 @@
 import { CityListContext } from "component/controllers/DashboardController";
+import WeatherWidgetController from "component/controllers/WeatherWidgetController";
 import { useContext } from "react";
 
 const Dashboard = () => {
@@ -6,7 +7,7 @@ const Dashboard = () => {
   return (
     <>
       {cityList.map((city) => (
-        <WeatherWidgetController city={city} />
+        <WeatherWidgetController key={city.CityCode} city={city} />
       ))}
     </>
   );

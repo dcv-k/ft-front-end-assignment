@@ -1,4 +1,4 @@
-import { API_URL, LOCAL_URL } from "../constants";
+import { API_URL, LOCAL_URL } from "./constants";
 
 export const local = {
   get: async (url, options) => {

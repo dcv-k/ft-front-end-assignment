@@ -1,7 +1,7 @@
 import Details from "component/views/Details/Details";
-import WeatherModel from "model/WeatherModel";
+import { WeatherModel } from "model/WeatherModel";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const DetailsController = () => {
   const { id } = useParams();

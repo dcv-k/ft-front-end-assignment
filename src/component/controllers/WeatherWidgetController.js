@@ -1,31 +1,36 @@
 import { useContext, useEffect, useState } from "react";
-import { useErrorBoundary } from "react-error-boundary";
-import WeatherWidget from "../components/WeatherWidget/WeatherWidget";
-import WeatherModel from "model/WeatherModel";
+import WeatherWidget from "component/views/WeatherWidget/WeatherWidget";
 import { useNavigate } from "react-router-dom";
 import { CityListContext } from "component/controllers/DashboardController";
+import { WeatherModel } from "model/WeatherModel";
 
 const WeatherWidgetController = ({ city }) => {
   const [weather, setWeather] = useState(null);
   const navigate = useNavigate();
-  const { cityList } = useContext(CityListContext);
+  const { cityList, setCityList } = useContext(CityListContext);
 
   useEffect(() => {
-    try {
-      const data = WeatherModel(city);
-      setWeather(data);
-    } catch (error) {
-      console.log("widget controller", error);
-    }
+    const fetchWeather = async () => {
+      try {
+        const data = new WeatherModel({ city });
+        await data.componentDidMount();
+        console.log("w controller", data.state.weather);
+        setWeather(data.state.weather);
+      } catch (error) {
+        console.log("dashboard", error);
+      }
+    };
+
+    fetchWeather();
   }, []);
 
   const handleClick = () => {
     navigate(`${weather.id}`);
   };
 
-  const handleRemoveClick = () => {
+  const handleRemoveClick = (e) => {
     console.log("remove");
-    setCities(
+    setCityList(
       cityList.filter(({ CityCode }) => CityCode !== String(weather.id))
     );
     e.stopPropagation();
