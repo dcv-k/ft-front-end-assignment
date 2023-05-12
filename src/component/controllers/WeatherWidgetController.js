@@ -24,11 +24,10 @@ const WeatherWidgetController = ({ city }) => {
   }, []);
 
   const handleClick = () => {
-    navigate(`${weather.id}`);
+    navigate(`/${weather.id}`, { state: { city } });
   };
 
   const handleRemoveClick = (e) => {
-    console.log("remove");
     setCityList(
       cityList.filter(({ CityCode }) => CityCode !== String(weather.id))
     );

@@ -1,20 +1,27 @@
 import Details from "component/views/Details/Details";
 import { WeatherModel } from "model/WeatherModel";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const DetailsController = () => {
-  const { id } = useParams();
-  const [weather, setWeather] = useState[null];
+  const location = useLocation();
+  const { city } = location.state;
+
+  const [weather, setWeather] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    try {
-      const data = WeatherModel();
-      setWeather(data);
-    } catch (error) {
-      console.log(error);
-    }
+    const fetchWeather = async () => {
+      try {
+        const data = new WeatherModel({ city, fresh: true });
+        await data.componentDidMount();
+        setWeather(data.state.weather);
+      } catch (error) {
+        console.log("dashboard", error);
+      }
+    };
+
+    fetchWeather();
   }, []);
 
   const handleBackClick = () => {

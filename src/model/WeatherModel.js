@@ -109,11 +109,10 @@ class WeatherModel extends React.Component {
       );
     };
 
-    if (getCache(this.props.city)) {
+    if (getCache(this.props.city) && !this.props.fresh) {
       console.log("from cache");
       let weather = getCache(this.props.city);
       this.state.weather = weather;
-      // this.props.onLoadWeather(weather);
     } else {
       console.log("from api");
       try {
@@ -121,7 +120,6 @@ class WeatherModel extends React.Component {
         weather = formatWeatherData(weather);
         setCache(this.props.city, weather);
         this.state.weather = weather;
-        // this.props.onLoadWeather(weather);
       } catch (error) {
         console.log("try", error);
       }
