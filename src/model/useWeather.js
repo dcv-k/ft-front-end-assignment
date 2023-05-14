@@ -1,5 +1,4 @@
-import React from "react";
-
+import { useEffect, useState } from "react";
 import {
   API_KEY,
   API_PROVIDER,
@@ -9,16 +8,13 @@ import {
   UNITS,
 } from "utils/constants";
 import { api } from "utils/API";
+import { useErrorBoundary } from "react-error-boundary";
 
-class WeatherModel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      weather: [],
-    };
-  }
+const useWeather = (city, fresh) => {
+  const { showBoundary } = useErrorBoundary();
+  const [weather, setWeather] = useState([]);
 
-  async componentDidMount() {
+  useEffect(() => {
     const getWeather = async (id) => {
       return await api.get(`/weather?id=${id}&units=${UNITS}&APPID=${API_KEY}`);
     };
@@ -110,20 +106,26 @@ class WeatherModel extends React.Component {
       );
     };
 
-    if (getCache(this.props.city) && !this.props.fresh) {
-      let weather = getCache(this.props.city);
-      this.state.weather = weather;
-    } else {
-      let weather = await getWeather(this.props.city.CityCode);
-      weather = formatWeatherData(weather);
-      setCache(this.props.city, weather);
-      this.state.weather = weather;
-    }
-  }
+    const fetchWeather = async () => {
+      console.log(city);
+      if (getCache(city) && !fresh) {
+        setWeather(getCache(city));
+      } else {
+        try {
+          let weather = await getWeather(city.CityCode);
+          weather = formatWeatherData(weather);
+          setCache(city, weather);
+          setWeather(weather);
+        } catch (error) {
+          showBoundary(error);
+        }
+      }
+    };
 
-  render() {
-    return null;
-  }
-}
+    fetchWeather();
+  }, [city, fresh]);
 
-export { WeatherModel };
+  return { weather, setWeather };
+};
+
+export { useWeather };

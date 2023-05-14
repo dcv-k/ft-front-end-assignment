@@ -10,8 +10,8 @@ const Dashboard = () => {
   return (
     <>
       {cityList.map((city) => (
-        <ErrorBoundary FallbackComponent={WidgetError}>
-          <WeatherWidgetController key={city.CityCode} city={city} />
+        <ErrorBoundary key={city.CityCode} FallbackComponent={WidgetError}>
+          <WeatherWidgetController city={city} />
         </ErrorBoundary>
       ))}
     </>
