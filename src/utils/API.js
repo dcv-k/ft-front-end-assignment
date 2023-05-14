@@ -25,3 +25,11 @@ export const api = {
     return data;
   },
 };
+
+const getCities = async (path) => {
+  return await local.get(path);
+};
+
+const getWeather = async (id, units, api_key) => {
+  return await api.get(`/weather?id=${id}&units=${units}&APPID=${api_key}`);
+};
