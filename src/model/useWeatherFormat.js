@@ -1,9 +1,4 @@
-import {
-  API_PROVIDER,
-  PATH_ARROWHEAD,
-  PATH_BACK,
-  PATH_CROSS,
-} from "utils/constants";
+import { API_PROVIDER, PATH_ARROWHEAD, PATH_BACK, PATH_CROSS } from "constants";
 
 const useWeatherFormat = () => {
   const formatWeatherData = ({

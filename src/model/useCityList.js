@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 
-import { PATH_JSON } from "utils/constants";
-import { useAPIHandler } from "utils/useAPIHandler";
+import { PATH_JSON } from "constants";
+import { useAPIHandler } from "./useAPIHandler";
 
 function useCityList() {
   const { getCities } = useAPIHandler();
@@ -19,7 +19,7 @@ function useCityList() {
       }
     }
     fetchData();
-  }, [getCities, showBoundary]);
+  }, [showBoundary]);
 
   return { cityList, setCityList };
 }

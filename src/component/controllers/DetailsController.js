@@ -9,7 +9,7 @@ const DetailsController = () => {
 
   // get clicked city object and using that object to get fresh weather data
   const { city } = location.state;
-  const { weather } = useWeather({ city, fresh: true });
+  const { weather } = useWeather(city, true);
 
   const handleBackClick = () => {
     navigate("/");
