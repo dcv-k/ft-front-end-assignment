@@ -18,7 +18,7 @@ const useAPIHandler = () => {
 
   const getCity = async (cityCode, path) => {
     const { List } = await fetchData(LOCAL_URL + path);
-    return List.find((city) => city.CityCode === cityCode);
+    return await List.find((city) => city.CityCode === cityCode);
   };
 
   const getWeather = async (id, units, api_key) => {

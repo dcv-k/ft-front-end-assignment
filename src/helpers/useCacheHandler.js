@@ -16,7 +16,8 @@ const useCacheHandler = () => {
 
   const getCache = (city) => {
     const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
-    const cityNew = getCity(city.CityCode, PATH_JSON);
+    // const cityNew = await getCity(city.CityCode, PATH_JSON);
+
     if (
       cacheCity &&
       Date.now() - cacheCity.cachedTime <
