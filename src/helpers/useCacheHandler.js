@@ -1,4 +1,9 @@
+import { useAPIHandler } from "./useAPIHandler";
+import { PATH_JSON } from "constants";
+
 const useCacheHandler = () => {
+  const { getCity } = useAPIHandler();
+
   const timeToMilliseconds = (unit, time) => {
     if (unit === "MIN") {
       return time * 60 * 1000;
@@ -11,7 +16,7 @@ const useCacheHandler = () => {
 
   const getCache = (city) => {
     const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
-
+    const cityNew = getCity(city.CityCode, PATH_JSON);
     if (
       cacheCity &&
       Date.now() - cacheCity.cachedTime <
