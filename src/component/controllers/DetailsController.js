@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import Details from "component/views/Details/Details";
-import { useWeather } from "model/useWeather";
+import Details from "../views/Details/Details";
+import { useWeather } from "../../model/useWeather";
 
 const DetailsController = () => {
   const location = useLocation();

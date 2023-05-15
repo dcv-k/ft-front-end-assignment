@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { PATH_LOGO } from "constants";
 import Search from "component/views/Search/Search";
 
-const PageLayout = () => {
+const AppLayout = () => {
   document.title = "Weather App";
 
   return (
@@ -30,4 +30,4 @@ const PageLayout = () => {
   );
 };
 
-export default PageLayout;
+export default AppLayout;

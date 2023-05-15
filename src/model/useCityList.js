@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 
-import { PATH_JSON } from "constants";
-import { useAPIHandler } from "./useAPIHandler";
+import { PATH_JSON } from "../constants";
+import { useAPIHandler } from "../helpers/useAPIHandler";
 
 function useCityList() {
   const { getCities } = useAPIHandler();

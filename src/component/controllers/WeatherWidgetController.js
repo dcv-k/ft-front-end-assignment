@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import WeatherWidget from "component/views/WeatherWidget/WeatherWidget";
-import { CityListContext } from "component/controllers/DashboardController";
-import { useWeather } from "model/useWeather";
+import WeatherWidget from "../views/WeatherWidget/WeatherWidget";
+import { CityListContext } from "./DashboardController";
+import { useWeather } from "../../model/useWeather";
 
 const WeatherWidgetController = ({ city }) => {
   const navigate = useNavigate();

@@ -7,15 +7,15 @@ import {
 import { ErrorBoundary } from "react-error-boundary";
 
 import "./App.css";
-import DetailsController from "component/controllers/DetailsController";
-import PageLayout from "layout/PageLayout";
-import DashboardController from "component/controllers/DashboardController";
-import DetailsError from "component/views/DetailsError/DetailsError";
-import WidgetError from "component/views/WidgetError/WidgetError";
+import AppLayout from "./AppLayout";
+import WidgetError from "./component/views/WidgetError/WidgetError";
+import DetailsError from "./component/views/DetailsError/DetailsError";
+import DetailsController from "./component/controllers/DetailsController";
+import DashboardController from "./component/controllers/DashboardController";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<PageLayout />}>
+    <Route path="/" element={<AppLayout />}>
       <Route
         index
         element={
