@@ -5,7 +5,7 @@ const useAPIHandler = () => {
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error(
-        `Error fetching data from ${url}: Error status - ${response.status}`
+        `Error fetching data : Error status - ${response.status}`
       );
     }
     const data = await response.json();
