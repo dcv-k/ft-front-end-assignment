@@ -38,7 +38,9 @@
   
   .widget-error .top .message {
     font-size: 16px;
-    color: var(--color-light);
+    font-weight: bold;
+    color: lightgrey;
+    text-align: center;
     margin: 0;
   }
   

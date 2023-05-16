@@ -1,28 +1,12 @@
-import { useErrorBoundary } from "react-error-boundary";
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 
-import { CityListModel } from "model/CityListModel";
-import Dashboard from "component/views/Dashboard/Dashboard";
+import Dashboard from "../views/Dashboard/Dashboard";
+import { useCityList } from "../../model/useCityList";
 
 export const CityListContext = createContext();
 
 const DashboardController = () => {
-  const [cityList, setCityList] = useState(null);
-  const { showBoundary } = useErrorBoundary();
-
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const data = new CityListModel();
-        await data.componentDidMount();
-        setCityList(data.state.cityList);
-      } catch (error) {
-        showBoundary(error);
-      }
-    };
-
-    fetchCities();
-  }, []);
+  const { cityList, setCityList } = useCityList();
 
   return (
     <>

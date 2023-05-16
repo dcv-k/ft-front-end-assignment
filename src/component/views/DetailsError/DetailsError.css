@@ -35,7 +35,9 @@
   
   .details-error .top .message {
     font-size: 24px;
-    color: var(--color-light);
+    font-weight: bold;
+    color: lightgrey;
+    text-align: center;
     margin: 0;
   }
   
