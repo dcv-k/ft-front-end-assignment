@@ -8,10 +8,10 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import "./App.css";
 import AppLayout from "./AppLayout";
-import WidgetError from "./component/views/WidgetError/WidgetError";
-import DetailsError from "./component/views/DetailsError/DetailsError";
-import DetailsController from "./component/controllers/DetailsController";
-import DashboardController from "./component/controllers/DashboardController";
+import WidgetError from "./component/WidgetError/WidgetError";
+import DetailsError from "./component/DetailsError/DetailsError";
+import Dashboard from "component/Dashboard/Dashboard";
+import Details from "component/Details/Details";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,7 +20,7 @@ const router = createBrowserRouter(
         index
         element={
           <ErrorBoundary FallbackComponent={WidgetError}>
-            <DashboardController />
+            <Dashboard />
           </ErrorBoundary>
         }
       />
@@ -29,7 +29,7 @@ const router = createBrowserRouter(
         path=":id"
         element={
           <ErrorBoundary FallbackComponent={DetailsError}>
-            <DetailsController />
+            <Details />
           </ErrorBoundary>
         }
       />

@@ -1,6 +1,16 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Details.css";
+import { useWeather } from "model/useWeather";
 
-const Details = ({ weather, handleBackClick }) => {
+const Details = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // get clicked city object and using that object to get fresh weather data
+  const { city } = location.state;
+  const getFreshData = true;
+  const { weather } = useWeather(city, getFreshData);
+
   const {
     color,
     name,
@@ -21,6 +31,10 @@ const Details = ({ weather, handleBackClick }) => {
     back,
     arrow,
   } = weather;
+
+  const handleBackClick = () => {
+    navigate("/");
+  };
 
   return (
     <div className="weather-details">
