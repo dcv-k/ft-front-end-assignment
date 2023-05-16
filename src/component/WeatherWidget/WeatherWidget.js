@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import "./WeatherWidget.css";
+import { useWeather } from "model/useWeather";
 
-const WeatherWidget = ({ weather, handleClick, handleRemoveClick }) => {
+const WeatherWidget = ({ city }) => {
+  const navigate = useNavigate();
+  const { weather } = useWeather(city);
+
   const {
-    id,
     color,
     name,
     country,
@@ -22,6 +26,10 @@ const WeatherWidget = ({ weather, handleClick, handleRemoveClick }) => {
     cross,
     arrow,
   } = weather;
+
+  const handleClick = () => {};
+
+  const handleRemoveClick = () => {};
 
   return (
     <div className="weather-widget" onClick={handleClick}>

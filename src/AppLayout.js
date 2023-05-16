@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import { PATH_LOGO } from "constants";
-import Search from "component/views/Search/Search";
+import Search from "component/Search/Search";
 
 const AppLayout = () => {
   document.title = "Weather App";

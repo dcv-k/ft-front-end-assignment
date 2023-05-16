@@ -1,62 +1,57 @@
-.widget-error {
-    width: 430px; 
-    min-height: 282px;
-    margin: 30px;
+.details-error {
+    width: 750px; 
+    min-height: 445px;
+    margin: 20px;
     border-radius: 8px;
     background-color: #333;
     align-self: stretch;
     
   }
   
-  .widget-error .top {
-    background-image: var(--cloud-url);
+  .details-error .top {
     padding-left: 30px;
     padding-right: 30px;
-    min-height: 173px;
-    background-size: cover;
-    background-repeat: no-repeat; 
+    min-height: 295px;
   }
   
-  .widget-error .top .heading {
+  .details-error .top .heading {
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .widget-error .top .heading .icon--error {
+  .details-error .top .heading .icon--error {
     width: 36px;
     margin-right: 10px;
   }
   
-  .widget-error .top .heading p {
+  .details-error .top .heading p {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 28px;
     line-height: 1;
     letter-spacing: 1px;
-    color: var(--color-light)
+    color: var(--color-light);
   }
   
-  .widget-error .top .message {
-    font-size: 16px;
-    font-weight: bold;
-    color: lightgrey;
-    text-align: center;
+  .details-error .top .message {
+    font-size: 24px;
+    color: var(--color-light);
     margin: 0;
   }
   
-  .widget-error .bottom {
+  .details-error .bottom {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 99px;
+    min-height: 140px;
     padding: 5px 20px 5px 20px;
     background-color: var(--color-grey);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
   }
   
-  .widget-error .bottom .btn-retry {
-    padding: 5px 10px;
+  .details-error .bottom .btn-retry {
+    padding: 10px 15px;
     background-color: var(--color-red);
     color: var(--color-light);
     font-weight: bold;
@@ -68,6 +63,6 @@
     cursor: pointer;
   }
   
-  .widget-error .bottom .icon--retry {
-    width: 24px;
+  .details-error .bottom .icon--retry {
+    width: 28px;
   }
