@@ -1,54 +1,3 @@
-:root {
-  --cloud-url: url("../public/images/cloud.png");
-
-  --color-red: #9c3939;
-  --color-light-blue: #388EE7;
-  --color-purple: #6249CC;
-  --color-green: #40B681;
-  --color-orange: #DE944E;
-
-  --color-light: #ffffff;
-  --color-dark: #1F2128;
-  --color-grey: #383B47;
-  --color-dark-grey: #30333D;
-}
-
-
-[class^="w-"] {
-  background-color: var(--color-red)
-}
-
-.w-overcast-clouds {
-  background-color: var(--color-light-blue)
-}
-
-.w-few-clouds {
-  background-color: var(--color-light-blue)
-}
-
-.w-broken-clouds {
-  
-  background-color: var(--color-purple)
-}
-
-.w-clear-sky { 
-  background-color: var(--color-green)
-}
-
-.w-moderate-rain {
-  background-color: var(--color-red)
-}
-
-.w-light-rain {
-  background-color: var(--color-orange)
-}
-
-.w-mist {
-  background-color: var(--color-red)
-}
-
-/* app */
-
 .container {
   display: flex;
   flex-direction: column;
@@ -126,11 +75,11 @@ footer p {
 }
 
 .error {
-  /* width: 500px; */
-  padding: 10px 50px;
+  width: 430px;
   background-color: var(--color-red);
   color: lightgrey;
-  border-radius: 8px;
+  border-radius: 10px;
+  margin: 30px;
 
   display: flex;
   flex-direction: column;
@@ -141,6 +90,7 @@ footer p {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 22px;
 }
 
 .error .title .text{
@@ -156,10 +106,14 @@ footer p {
 
 .error .subtitle {
   margin: 10px 0;
-  
+  text-align: center;
 }
 
 .error .message {
-  margin: 5px 0;
-  
+  margin: 5px;
+}
+
+.error .city {
+  margin-top: 5px;
+  margin-bottom: 22px;
 }

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import useApiHandler from "hooks/useApiHandler";
-import { LOCAL_URL, PATH_JSON } from "constants";
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
-import { PATH_ERROR } from "constants";
+import { LOCAL_URL, PATH_JSON, PATH_ERROR } from "constants";
 
 const Dashboard = () => {
   const { error, apiHandler } = useApiHandler();
@@ -24,7 +23,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, [error]);
+  }, []);
 
   const removeCity = (e, cityCode) => {
     e.stopPropagation();
@@ -39,9 +38,11 @@ const Dashboard = () => {
         <div className="error">
           <div className="title">
             <img src={PATH_ERROR} alt="error"></img>
-            <p className="text">Request Failed!</p>
+            <p className="text">Request Failed</p>
           </div>
-          <p className="subtitle">Error occurred while fetching data!</p>
+          <p className="subtitle">
+            Error occurred while fetching data from JSON file
+          </p>
           <p className="message">{error.message}</p>
         </div>
       )}

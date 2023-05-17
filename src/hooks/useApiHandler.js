@@ -8,14 +8,13 @@ const useApiHandler = () => {
 
     try {
       const response = await apiFunction(...args);
-
       return response;
     } catch (error) {
       setError(error);
     }
   };
 
-  return { error, apiHandler };
+  return { error, setError, apiHandler };
 };
 
 export default useApiHandler;

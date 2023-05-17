@@ -1,18 +1,17 @@
-import { useNavigate } from "react-router-dom";
 import "./WeatherWidget.css";
-import { API_URL } from "constants";
-import { useEffect, useState } from "react";
-import useApiHandler from "hooks/useApiHandler";
 import { UNITS } from "constants";
-import { API_KEY } from "constants";
+import { useEffect, useState } from "react";
+import { API_URL, API_KEY, PATH_ERROR } from "constants";
+import { useNavigate } from "react-router-dom";
+import useApiHandler from "hooks/useApiHandler";
 import { useCacheHandler } from "hooks/useCacheHandler";
 import { useWeatherFormat } from "hooks/useWeatherFormat";
 
 const WeatherWidget = ({ city, removeCity }) => {
   const navigate = useNavigate();
-  const { formatWeatherData } = useWeatherFormat();
+  const { error, apiHandler, setError } = useApiHandler();
   const [weather, setWeather] = useState(null);
-  const { apiHandler } = useApiHandler();
+  const { formatWeatherData } = useWeatherFormat();
   const { setCache, getCache, timeToMilliseconds } = useCacheHandler();
 
   const getWeatherData = async (id, units, api_key) => {
@@ -33,15 +32,19 @@ const WeatherWidget = ({ city, removeCity }) => {
         setWeather(getCache(city));
         console.log("Load weather from cache for: ", city.CityName);
       } else {
-        const data = await apiHandler(
-          getWeatherData,
-          city.CityCode,
-          UNITS,
-          API_KEY
-        );
-        setWeather(data);
-        setCache(city.CityCode, data);
-        console.log("Load weather from API for: ", city.CityName);
+        try {
+          const data = await apiHandler(
+            getWeatherData,
+            city.CityCode,
+            UNITS,
+            API_KEY
+          );
+          setWeather(data);
+          setCache(city.CityCode, data);
+          console.log("Load weather from API for: ", city.CityName);
+        } catch (error) {
+          setError(error);
+        }
       }
     };
 
@@ -66,6 +69,19 @@ const WeatherWidget = ({ city, removeCity }) => {
 
   return (
     <>
+      {error && (
+        <div className="error">
+          <div className="title">
+            <img src={PATH_ERROR} alt="error"></img>
+            <p className="text">Request Failed</p>
+          </div>
+          <p className="subtitle">
+            Error occurred while fetching data from OpenWeatherMap API
+          </p>
+          <p className="message">{error.message}</p>
+          <p className="city">City name : {city.CityName}</p>
+        </div>
+      )}
       {weather && (
         <div
           className="weather-widget"

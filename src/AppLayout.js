@@ -1,9 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { PATH_LOGO } from "constants";
+import { PATH_LOGO, PATH_ERROR } from "constants";
+import useApiHandler from "hooks/useApiHandler";
 
 const AppLayout = () => {
-  document.title = "Weather App";
-
   return (
     <div className="container">
       <nav>
