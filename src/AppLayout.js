@@ -1,7 +1,5 @@
 import { Outlet } from "react-router-dom";
-
 import { PATH_LOGO } from "constants";
-import Search from "component/Search/Search";
 
 const AppLayout = () => {
   document.title = "Weather App";
@@ -14,7 +12,10 @@ const AppLayout = () => {
       </nav>
 
       <section>
-        <Search />
+        <div className="search">
+          <input placeholder="Enter a city"></input>
+          <button>Add City</button>
+        </div>
       </section>
 
       <div className="content">
