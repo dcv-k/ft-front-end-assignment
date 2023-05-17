@@ -8,7 +8,6 @@ import { useAPIHandler } from "../helpers/useAPIHandler";
 
 const useWeather = (city, fresh) => {
   const { getWeather } = useAPIHandler();
-  const { showBoundary } = useErrorBoundary();
   const { getCache, setCache } = useCacheHandler();
   const { formatWeatherData } = useWeatherFormat();
   const [weather, setWeather] = useState([]);
@@ -25,9 +24,7 @@ const useWeather = (city, fresh) => {
           setCache(city, weather);
           setWeather(weather);
           console.log("Load weather from API for: ", city.CityName);
-        } catch (error) {
-          showBoundary(error);
-        }
+        } catch (error) {}
       }
     };
 

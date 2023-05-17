@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
-
-import WidgetError from "../WidgetError/WidgetError";
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
 import { useCityList } from "model/useCityList";
 
@@ -12,9 +8,11 @@ const Dashboard = () => {
     <>
       {cityList &&
         cityList.map((city) => (
-          <ErrorBoundary FallbackComponent={WidgetError}>
-            <WeatherWidget key={city.CityCode} city={city} />
-          </ErrorBoundary>
+          <WeatherWidget
+            key={city.CityCode}
+            city={city}
+            setCityList={setCityList}
+          />
         ))}
     </>
   );
