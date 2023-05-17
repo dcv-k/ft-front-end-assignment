@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useApiHandler from "hooks/useApiHandler";
 import { LOCAL_URL, PATH_JSON } from "constants";
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
+import { PATH_ERROR } from "constants";
 
 const Dashboard = () => {
   const { error, apiHandler } = useApiHandler();
@@ -10,9 +11,7 @@ const Dashboard = () => {
   const getCityList = async (path) => {
     const response = await fetch(LOCAL_URL + path);
     if (!response.ok) {
-      throw new Error(
-        `Error fetching data : Error status - ${response.status}`
-      );
+      throw new Error(`Error status - ${response.status}`);
     }
     const { List } = await response.json();
     return List;
@@ -20,20 +19,32 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const data = await apiHandler(getCityList, PATH_JSON);
-        setCityList(data);
-      } catch (error) {}
+      const data = await apiHandler(getCityList, PATH_JSON);
+      setCityList(data);
     };
 
     fetchData();
-  }, []);
+  }, [error]);
 
-  const removeCity = (cityCode) => {};
+  const removeCity = (e, cityCode) => {
+    e.stopPropagation();
+    setCityList((prevCityList) =>
+      prevCityList.filter(({ CityCode }) => CityCode !== String(cityCode))
+    );
+  };
 
   return (
     <>
-      {error && <p>error!</p>}
+      {error && (
+        <div className="error">
+          <div className="title">
+            <img src={PATH_ERROR} alt="error"></img>
+            <p className="text">Request Failed!</p>
+          </div>
+          <p className="subtitle">Error occurred while fetching data!</p>
+          <p className="message">{error.message}</p>
+        </div>
+      )}
       {cityList &&
         cityList.map((city) => (
           <WeatherWidget

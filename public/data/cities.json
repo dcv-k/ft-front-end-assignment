@@ -14,7 +14,7 @@
       "Temp": "8.6",
       "Status": "Clear",
       "ExpTimeUnit": "MIN",
-      "ExpTime": "20"
+      "ExpTime": "30"
     },
     {
       "CityCode": "2644210",
@@ -30,7 +30,7 @@
       "Temp": "22.4",
       "Status": "Clear",
       "ExpTimeUnit": "MIN",
-      "ExpTime": "20"
+      "ExpTime": "2"
     },
     {
       "CityCode": "2147714",

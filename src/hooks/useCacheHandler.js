@@ -27,7 +27,7 @@ const useCacheHandler = () => {
     );
   };
 
-  return { getCache, setCache };
+  return { getCache, setCache, timeToMilliseconds };
 };
 
 export { useCacheHandler };
