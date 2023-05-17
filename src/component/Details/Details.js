@@ -1,15 +1,45 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Details.css";
-import { useWeather } from "model/useWeather";
+import { UNITS } from "constants";
+import { API_KEY } from "constants";
+import { API_URL } from "constants";
+import useApiHandler from "hooks/useApiHandler";
+import { useEffect, useState } from "react";
+import { useWeatherFormat } from "hooks/useWeatherFormat";
 
 const Details = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [weather, setWeather] = useState();
+  const { formatWeatherData } = useWeatherFormat();
+  const { apiHandler } = useApiHandler();
 
-  // get clicked city object and using that object to get fresh weather data
-  const { city } = location.state;
-  const getFreshData = true;
-  const { weather } = useWeather(city, getFreshData);
+  const { cityCode } = location.state;
+
+  const getWeatherData = async (id, units, api_key) => {
+    const response = await fetch(
+      `${API_URL}/weather?id=${id}&units=${units}&APPID=${api_key}`
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Error fetching data : Error status - ${response.status}`
+      );
+    }
+    let data = await response.json();
+    data = formatWeatherData(data);
+    return data;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await apiHandler(getWeatherData, cityCode, UNITS, API_KEY);
+        setWeather(data);
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
 
   const {
     color,
@@ -30,11 +60,16 @@ const Details = () => {
     sunset,
     back,
     arrow,
-  } = weather;
+  } = weather || {};
 
   const handleBackClick = () => {
     navigate("/");
   };
+
+  // const getCity = async (cityCode, path) => {
+  //   const { List } = await fetchData(LOCAL_URL + path);
+  //   return await List.find((city) => city.CityCode === cityCode);
+  // };
 
   return (
     <div className="weather-details">

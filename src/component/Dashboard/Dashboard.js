@@ -1,20 +1,46 @@
 import { useEffect, useState } from "react";
-import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
-
-import WidgetError from "../WidgetError/WidgetError";
+import useApiHandler from "hooks/useApiHandler";
+import { LOCAL_URL, PATH_JSON } from "constants";
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
-import { useCityList } from "model/useCityList";
 
 const Dashboard = () => {
-  const { cityList, setCityList } = useCityList();
+  const { error, apiHandler } = useApiHandler();
+  const [cityList, setCityList] = useState(null);
+
+  const getCityList = async (path) => {
+    const response = await fetch(LOCAL_URL + path);
+    if (!response.ok) {
+      throw new Error(
+        `Error fetching data : Error status - ${response.status}`
+      );
+    }
+    const { List } = await response.json();
+    return List;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await apiHandler(getCityList, PATH_JSON);
+        setCityList(data);
+      } catch (error) {}
+    };
+
+    fetchData();
+  }, []);
+
+  const removeCity = (cityCode) => {};
 
   return (
     <>
+      {error && <p>error!</p>}
       {cityList &&
         cityList.map((city) => (
-          <ErrorBoundary FallbackComponent={WidgetError}>
-            <WeatherWidget key={city.CityCode} city={city} />
-          </ErrorBoundary>
+          <WeatherWidget
+            key={city.CityCode}
+            city={city}
+            removeCity={removeCity}
+          />
         ))}
     </>
   );
