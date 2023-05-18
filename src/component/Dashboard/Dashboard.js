@@ -21,7 +21,6 @@ const Dashboard = () => {
       const data = await apiHandler(getCityList, PATH_JSON);
       setCityList(data);
     };
-
     fetchData();
   }, []);
 

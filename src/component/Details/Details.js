@@ -56,7 +56,6 @@ const Details = () => {
         setError(error);
       }
     };
-
     fetchData();
   }, []);
 
