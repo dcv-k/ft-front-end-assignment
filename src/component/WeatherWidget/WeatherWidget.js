@@ -14,6 +14,7 @@ const WeatherWidget = ({ city, removeCity }) => {
   const { formatWeatherData } = useWeatherFormat();
   const { setCache, getCache, timeToMilliseconds } = useCacheHandler();
 
+  // api request handling methods
   const getWeatherData = async (id, units, api_key) => {
     const response = await fetch(
       `${API_URL}/weather?id=${id}&units=${units}&APPID=${api_key}`
@@ -26,6 +27,7 @@ const WeatherWidget = ({ city, removeCity }) => {
     return data;
   };
 
+  // pass api request methods throught apiHandler and catch errors
   useEffect(() => {
     const fetchData = async () => {
       if (getCache(city)) {
@@ -48,6 +50,7 @@ const WeatherWidget = ({ city, removeCity }) => {
       }
     };
 
+    // using separate function to get weather data.
     const resetCache = async () => {
       try {
         const data = await apiHandler(
@@ -66,6 +69,7 @@ const WeatherWidget = ({ city, removeCity }) => {
 
     fetchData();
 
+    // auto re-render each component, interval time set to each city's cache expire time
     const interval = setInterval(() => {
       resetCache();
     }, timeToMilliseconds(city.ExpTimeUnit, city.ExpTime));

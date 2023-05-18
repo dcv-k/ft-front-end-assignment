@@ -20,8 +20,10 @@ const Details = () => {
   const { formatWeatherData } = useWeatherFormat();
   const { error, setError, apiHandler } = useApiHandler();
 
+  // state was set in WeatherWidget onClick action
   const { cityCode } = location.state;
 
+  // api request handling methods
   const getWeatherData = async (id, units, api_key) => {
     const response = await fetch(
       `${API_URL}/weather?id=${id}&units=${units}&APPID=${api_key}`
@@ -45,6 +47,7 @@ const Details = () => {
     return await List.find((city) => city.CityCode === cityCode);
   };
 
+  // pass api request methods throught apiHandler and catch errors
   useEffect(() => {
     const fetchData = async () => {
       try {
