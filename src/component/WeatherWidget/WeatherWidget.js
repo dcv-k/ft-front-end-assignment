@@ -48,10 +48,26 @@ const WeatherWidget = ({ city, removeCity }) => {
       }
     };
 
+    const resetCache = async () => {
+      try {
+        const data = await apiHandler(
+          getWeatherData,
+          city.CityCode,
+          UNITS,
+          API_KEY
+        );
+        setWeather(data);
+        setCache(city.CityCode, data);
+        console.log("Load weather from API for: ", city.CityName);
+      } catch (error) {
+        setError(error);
+      }
+    };
+
     fetchData();
 
     const interval = setInterval(() => {
-      fetchData();
+      resetCache();
     }, timeToMilliseconds(city.ExpTimeUnit, city.ExpTime));
 
     return () => {

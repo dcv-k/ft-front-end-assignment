@@ -80,6 +80,7 @@ footer p {
   color: lightgrey;
   border-radius: 10px;
   margin: 30px;
+  padding-bottom: 22px;
 
   display: flex;
   flex-direction: column;
@@ -115,5 +116,4 @@ footer p {
 
 .error .city {
   margin-top: 5px;
-  margin-bottom: 22px;
 }
