@@ -1,20 +1,20 @@
 {
   "List": [
     {
-      "CityCode": "1248991v",
+      "CityCode": "1248991",
       "CityName": "Colombo",
       "Temp": "33.0",
       "Status": "Clouds",
-      "ExpTimeUnit": "MIN",
-      "ExpTime": "1"
+      "ExpTimeUnit": "SEC",
+      "ExpTime": "5"
     },
     {
       "CityCode": "1850147",
       "CityName": "Tokyo",
       "Temp": "8.6",
       "Status": "Clear",
-      "ExpTimeUnit": "MIN",
-      "ExpTime": "30"
+      "ExpTimeUnit": "SEC",
+      "ExpTime": "10"
     },
     {
       "CityCode": "2644210",

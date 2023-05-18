@@ -1,18 +1,24 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+  UNITS,
+  LOCAL_URL,
+  PATH_ERROR,
+  API_URL,
+  API_KEY,
+  PATH_JSON,
+} from "constants";
 import "./Details.css";
-import { UNITS } from "constants";
-import { API_KEY } from "constants";
-import { API_URL } from "constants";
-import useApiHandler from "hooks/useApiHandler";
 import { useEffect, useState } from "react";
+import useApiHandler from "hooks/useApiHandler";
 import { useWeatherFormat } from "hooks/useWeatherFormat";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Details = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [city, setCity] = useState();
   const [weather, setWeather] = useState();
   const { formatWeatherData } = useWeatherFormat();
-  const { apiHandler } = useApiHandler();
+  const { error, setError, apiHandler } = useApiHandler();
 
   const { cityCode } = location.state;
 
@@ -30,95 +36,103 @@ const Details = () => {
     return data;
   };
 
+  const getCity = async (cityCode, path) => {
+    const response = await fetch(LOCAL_URL + path);
+    if (!response.ok) {
+      throw new Error(`Error status - ${response.status}`);
+    }
+    const { List } = await response.json();
+    return await List.find((city) => city.CityCode === cityCode);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const city = await apiHandler(getCity, cityCode, PATH_JSON);
         const data = await apiHandler(getWeatherData, cityCode, UNITS, API_KEY);
+        setCity(city);
         setWeather(data);
-      } catch (error) {}
+      } catch (error) {
+        setError(error);
+      }
     };
 
     fetchData();
   }, []);
 
-  const {
-    color,
-    name,
-    country,
-    dateTime,
-    icon,
-    description,
-    temperature,
-    minTemperature,
-    maxTemperature,
-    humidity,
-    pressure,
-    visibility,
-    speed,
-    degree,
-    sunrise,
-    sunset,
-    back,
-    arrow,
-  } = weather || {};
-
   const handleBackClick = () => {
     navigate("/");
   };
 
-  // const getCity = async (cityCode, path) => {
-  //   const { List } = await fetchData(LOCAL_URL + path);
-  //   return await List.find((city) => city.CityCode === cityCode);
-  // };
-
   return (
-    <div className="weather-details">
-      <div className={color + " top"}>
-        <div className="btn-back" onClick={handleBackClick}>
-          <img alt="weather" className="icon--back" src={back} />
-        </div>
-        <div className="content">
-          <div className="center">
-            <p className="city">
-              {name},{country}
-            </p>
-            <p>{dateTime}</p>
+    <>
+      {error && (
+        <div className="error">
+          <div className="title">
+            <img src={PATH_ERROR} alt="error"></img>
+            <p className="text">Request Failed</p>
           </div>
-          <div className="row">
+          <p className="subtitle">
+            Error occurred while fetching data from OpenWeatherMap API
+          </p>
+          <p className="message">{error.message}</p>
+          <p className="city">City name : {city.CityName}</p>
+        </div>
+      )}
+      {weather && (
+        <div className="weather-details">
+          <div className={weather.color + " top"}>
+            <div className="btn-back" onClick={handleBackClick}>
+              <img alt="weather" className="icon--back" src={weather.back} />
+            </div>
+            <div className="content">
+              <div className="center">
+                <p className="city">
+                  {weather.name},{weather.country}
+                </p>
+                <p>{weather.dateTime}</p>
+              </div>
+              <div className="row">
+                <div className="left">
+                  <img
+                    alt="weather"
+                    className="icon--weather"
+                    src={weather.icon}
+                  />
+                  <p className="description">{weather.description}</p>
+                </div>
+                <div className="right">
+                  <p className="temperature">{weather.temperature} &deg;c</p>
+                  <p className="temperature-max">
+                    Temp Min: {weather.minTemperature} &deg;c
+                  </p>
+                  <p className="temperature-min">
+                    Temp Max: {weather.maxTemperature} &deg;c
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bottom">
             <div className="left">
-              <img alt="weather" className="icon--weather" src={icon} />
-              <p className="description">{description}</p>
+              <p>Pressure: {weather.pressure}hPa</p>
+              <p>Humidity: {weather.humidity}%</p>
+              <p>Visibility: {weather.visibility}Km</p>
+            </div>
+            <div className="center">
+              <img alt="arrow" className="icon--arrow" src={weather.arrow} />
+              <p>
+                {weather.speed}Km/s {weather.degree}Degree
+              </p>
             </div>
             <div className="right">
-              <p className="temperature">{temperature} &deg;c</p>
-              <p className="temperature-max">
-                Temp Min: {minTemperature} &deg;c
-              </p>
-              <p className="temperature-min">
-                Temp Max: {maxTemperature} &deg;c
-              </p>
+              <p>Sunrise: {weather.sunrise}</p>
+              <p>Sunset: {weather.sunset}</p>
             </div>
           </div>
         </div>
-      </div>
-      <div className="bottom">
-        <div className="left">
-          <p>Pressure: {pressure}hPa</p>
-          <p>Humidity: {humidity}%</p>
-          <p>Visibility: {visibility}Km</p>
-        </div>
-        <div className="center">
-          <img alt="arrow" className="icon--arrow" src={arrow} />
-          <p>
-            {speed}Km/s {degree}Degree
-          </p>
-        </div>
-        <div className="right">
-          <p>Sunrise: {sunrise}</p>
-          <p>Sunset: {sunset}</p>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
