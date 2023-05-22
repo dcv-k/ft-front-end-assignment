@@ -58,3 +58,43 @@ body {
 .w-mist {
   background-color: var(--color-red)
 }
+
+.error {
+  width: 430px;
+  background-color: var(--color-red);
+  color: lightgrey;
+  border-radius: 10px;
+  margin: 30px;
+  padding-bottom: 22px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+}
+
+.error .title img {
+  width: 30px;
+  margin-right: 10px;
+}
+
+.error .title .text{
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.error .subtitle {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.error .message {
+  margin: 5px;
+}

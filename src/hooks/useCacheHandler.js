@@ -1,5 +1,5 @@
 const useCacheHandler = () => {
-  const timeToMilliseconds = (unit, time) => {
+  const getMilliseconds = (time, unit) => {
     if (unit === "MIN") {
       return time * 60 * 1000;
     } else if (unit === "SEC") {
@@ -18,7 +18,7 @@ const useCacheHandler = () => {
     if (
       cacheCity &&
       Date.now() - cacheCity.cachedTime <
-        timeToMilliseconds(city.ExpTimeUnit, city.ExpTime)
+        getMilliseconds(city.ExpireTime, city.TimeUnit)
     ) {
       return cacheCity.data;
     }
@@ -31,7 +31,7 @@ const useCacheHandler = () => {
     );
   };
 
-  return { hasKey, getCache, setCache, timeToMilliseconds };
+  return { hasKey, getCache, setCache, getMilliseconds };
 };
 
 export { useCacheHandler };

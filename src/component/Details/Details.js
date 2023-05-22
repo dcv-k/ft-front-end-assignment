@@ -1,69 +1,53 @@
-import {
-  UNITS,
-  LOCAL_URL,
-  PATH_ERROR,
-  API_URL,
-  API_KEY,
-  PATH_JSON,
-} from "constants";
+import { UNITS, PATH_ERROR, API_URL, API_KEY, JSON_URL } from "constants";
 import "./Details.css";
 import { useEffect, useRef, useState } from "react";
-import useApiHandler from "hooks/useApiHandler";
-import { useWeatherFormat } from "hooks/useWeatherFormat";
+import { useFlattenWeather } from "hooks/useFlattenWeather";
 import { useLocation, useNavigate } from "react-router-dom";
+import useApiHandler from "hooks/useApiHandler";
 
 const Details = () => {
-  const [weather, setWeather] = useState();
-
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { formatWeatherData } = useWeatherFormat();
-  const { error, setError, apiHandler } = useApiHandler();
+  const [weather, setWeather] = useState();
+  const { flattenWeather } = useFlattenWeather();
+  const { error, makeApiRequest } = useApiHandler();
 
   const cityName = useRef("");
-
-  // state was set in WeatherWidget onClick action
   const { cityCode } = location.state;
 
-  // api request handling methods
-  const getWeatherData = async (id, units, api_key) => {
-    const response = await fetch(
-      `${API_URL}/weather?id=${id}&units=${units}&APPID=${api_key}`
-    );
-    if (response.ok) {
-      throw new Error(
-        `Error fetching data : Error status - ${response.status}`
-      );
-    }
-    let data = await response.json();
-    data = formatWeatherData(data);
-    return data;
-  };
+  useEffect(() => {
+    let isMounted = false;
 
-  const getCity = async (cityCode, path) => {
-    const response = await fetch(LOCAL_URL + path);
-    if (!response.ok) {
-      throw new Error(`Error status - ${response.status}`);
-    }
-    const { List } = await response.json();
+    const fetchData = async () => {
+      try {
+        const data = await getWeather(cityCode, UNITS, API_KEY);
+        if (!isMounted) {
+          setWeather(data);
+        }
+      } catch (error) {
+        cityName.current = getCityName(JSON_URL);
+      }
+    };
+    fetchData();
+
+    return () => {
+      isMounted = true;
+    };
+  }, []);
+
+  const getCityName = async (path) => {
+    const { List } = await makeApiRequest(path, { method: "GET" });
     const city = List.find((city) => city.CityCode === cityCode);
     return city.CityName;
   };
 
-  // pass api request methods throught apiHandler and catch errors
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        cityName.current = await apiHandler(getCity, cityCode, PATH_JSON);
-        const data = await apiHandler(getWeatherData, cityCode, UNITS, API_KEY);
-        setWeather(data);
-      } catch (error) {
-        // setError(error);
-      }
-    };
-    fetchData();
-  }, []);
+  const getWeather = async (id, units, apiKey) => {
+    const data = await makeApiRequest(
+      `${API_URL}/weather?id=${id}&units=${units}&APPID=${apiKey}`,
+      { method: "GET" }
+    );
+    return flattenWeather(data);
+  };
 
   const handleBackClick = () => {
     navigate("/");
@@ -81,10 +65,9 @@ const Details = () => {
             Error occurred while fetching data from OpenWeatherMap API
           </p>
           <p className="message">{error.message}</p>
-          <p className="city">City name : {cityName.current}</p>
         </div>
       )}
-      {weather && (
+      {weather && !error && (
         <div className="weather-details">
           <div className={weather.color + " top"}>
             <div className="btn-back" onClick={handleBackClick}>

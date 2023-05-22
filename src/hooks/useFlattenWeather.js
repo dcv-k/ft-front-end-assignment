@@ -1,7 +1,7 @@
 import { API_PROVIDER, PATH_ARROWHEAD, PATH_BACK, PATH_CROSS } from "constants";
 
-const useWeatherFormat = () => {
-  const formatWeatherData = ({
+const useFlattenWeather = () => {
+  const flattenWeather = ({
     id,
     name,
     sys: { country },
@@ -59,7 +59,7 @@ const useWeatherFormat = () => {
     });
   };
 
-  return { formatWeatherData };
+  return { flattenWeather };
 };
 
-export { useWeatherFormat };
+export { useFlattenWeather };

@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
+
 import "./Dashboard.css";
-
-import useApiHandler from "../../hooks/useApiHandler";
+import useApiHandler from "hooks/useApiHandler";
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
-
-import { LOCAL_URL, PATH_JSON, PATH_ERROR } from "../../constants";
+import { JSON_URL, PATH_ERROR } from "../../constants";
 
 const Dashboard = () => {
   const [cities, setCities] = useState(null);
-  const { error, apiHandler } = useApiHandler();
+  const { error, makeApiRequest } = useApiHandler();
 
   useEffect(() => {
     let isMounted = false;
 
     const fetchData = async () => {
-      const data = await apiHandler(getCities, PATH_JSON);
+      const data = await getCities(JSON_URL);
       if (!isMounted) {
         setCities(data);
       }
@@ -27,23 +26,26 @@ const Dashboard = () => {
   }, []);
 
   const getCities = async (path) => {
-    const response = await fetch(LOCAL_URL + path);
-    if (!response.ok) {
-      throw new Error(`Error status - ${response.status}`);
-    }
-    const { List } = await response.json();
+    const { List } = await makeApiRequest(path, { method: "GET" });
     return List;
   };
 
   const removeCity = (e, cityCode) => {
     e.stopPropagation();
-    setCities((prevCityList) =>
-      prevCityList.filter(({ CityCode }) => CityCode !== String(cityCode))
+    setCities((prevCities) =>
+      prevCities.filter(({ CityCode }) => CityCode !== String(cityCode))
     );
   };
 
   return (
     <>
+      <section>
+        <div className="search">
+          <input placeholder="Enter a city"></input>
+          <button>Add City</button>
+        </div>
+      </section>
+
       {error && (
         <div className="error">
           <div className="title">
@@ -56,15 +58,10 @@ const Dashboard = () => {
           <p className="message">{error.message}</p>
         </div>
       )}
-      <section>
-        <div className="search">
-          <input placeholder="Enter a city"></input>
-          <button>Add City</button>
-        </div>
-      </section>
 
       <section className="widgets">
-        {cities &&
+        {!error &&
+          cities &&
           cities.map((city) => (
             <WeatherWidget
               key={city.CityCode}
