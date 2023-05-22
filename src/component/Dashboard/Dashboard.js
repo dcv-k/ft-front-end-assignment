@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Dashboard.css";
 
 import useApiHandler from "../../hooks/useApiHandler";
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
