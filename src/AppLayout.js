@@ -1,7 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { PATH_LOGO } from "constants";
+import useApiHandler from "hooks/useApiHandler";
 
 const AppLayout = () => {
+  const { error } = useApiHandler();
+
+  console.log(error);
+
   return (
     <div className="container">
       <nav>
@@ -9,17 +14,10 @@ const AppLayout = () => {
         <p>Weather App</p>
       </nav>
 
-      <section>
-        <div className="search">
-          <input placeholder="Enter a city"></input>
-          <button>Add City</button>
-        </div>
-      </section>
+      {error && <div>{error}</div>}
 
       <div className="content">
-        <section className="widgets">
-          <Outlet />
-        </section>
+        <Outlet />
       </div>
 
       <footer>

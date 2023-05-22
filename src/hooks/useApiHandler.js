@@ -9,8 +9,9 @@ const useApiHandler = () => {
     try {
       const response = await apiFunction(...args);
       return response;
-    } catch (error) {
-      setError(error);
+    } catch (err) {
+      setError(err);
+      console.log(err);
     }
   };
 

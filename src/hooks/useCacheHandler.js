@@ -9,6 +9,10 @@ const useCacheHandler = () => {
     }
   };
 
+  const hasKey = (key) => {
+    return null !== localStorage.getItem(key);
+  };
+
   const getCache = (city) => {
     const cacheCity = JSON.parse(localStorage.getItem(city.CityCode));
     if (
@@ -27,7 +31,7 @@ const useCacheHandler = () => {
     );
   };
 
-  return { getCache, setCache, timeToMilliseconds };
+  return { hasKey, getCache, setCache, timeToMilliseconds };
 };
 
 export { useCacheHandler };

@@ -7,18 +7,21 @@ import {
   PATH_JSON,
 } from "constants";
 import "./Details.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useApiHandler from "hooks/useApiHandler";
 import { useWeatherFormat } from "hooks/useWeatherFormat";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Details = () => {
+  const [weather, setWeather] = useState();
+
   const navigate = useNavigate();
   const location = useLocation();
-  const [city, setCity] = useState();
-  const [weather, setWeather] = useState();
+
   const { formatWeatherData } = useWeatherFormat();
   const { error, setError, apiHandler } = useApiHandler();
+
+  const cityName = useRef("");
 
   // state was set in WeatherWidget onClick action
   const { cityCode } = location.state;
@@ -28,7 +31,7 @@ const Details = () => {
     const response = await fetch(
       `${API_URL}/weather?id=${id}&units=${units}&APPID=${api_key}`
     );
-    if (!response.ok) {
+    if (response.ok) {
       throw new Error(
         `Error fetching data : Error status - ${response.status}`
       );
@@ -44,19 +47,19 @@ const Details = () => {
       throw new Error(`Error status - ${response.status}`);
     }
     const { List } = await response.json();
-    return await List.find((city) => city.CityCode === cityCode);
+    const city = List.find((city) => city.CityCode === cityCode);
+    return city.CityName;
   };
 
   // pass api request methods throught apiHandler and catch errors
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const city = await apiHandler(getCity, cityCode, PATH_JSON);
+        cityName.current = await apiHandler(getCity, cityCode, PATH_JSON);
         const data = await apiHandler(getWeatherData, cityCode, UNITS, API_KEY);
-        setCity(city);
         setWeather(data);
       } catch (error) {
-        setError(error);
+        // setError(error);
       }
     };
     fetchData();
@@ -78,7 +81,7 @@ const Details = () => {
             Error occurred while fetching data from OpenWeatherMap API
           </p>
           <p className="message">{error.message}</p>
-          <p className="city">City name : {city.CityName}</p>
+          <p className="city">City name : {cityName.current}</p>
         </div>
       )}
       {weather && (

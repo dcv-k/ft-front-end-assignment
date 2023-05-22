@@ -8,49 +8,16 @@ import { useCacheHandler } from "hooks/useCacheHandler";
 import { useWeatherFormat } from "hooks/useWeatherFormat";
 
 const WeatherWidget = ({ city, removeCity }) => {
+  const [weather, setWeather] = useState(null);
+
   const navigate = useNavigate();
   const { error, apiHandler, setError } = useApiHandler();
-  const [weather, setWeather] = useState(null);
   const { formatWeatherData } = useWeatherFormat();
-  const { setCache, getCache, timeToMilliseconds } = useCacheHandler();
+  const { hasKey, setCache, getCache, timeToMilliseconds } = useCacheHandler();
 
-  // api request handling methods
-  const getWeatherData = async (id, units, api_key) => {
-    const response = await fetch(
-      `${API_URL}/weather?id=${id}&units=${units}&APPID=${api_key}`
-    );
-    if (!response.ok) {
-      throw new Error(`API Error : Error status - ${response.status}`);
-    }
-    let data = await response.json();
-    data = formatWeatherData(data);
-    return data;
-  };
-
-  // pass api request methods throught apiHandler and catch errors
   useEffect(() => {
-    const fetchData = async () => {
-      if (getCache(city)) {
-        setWeather(getCache(city));
-        console.log("Load weather from cache for: ", city.CityName);
-      } else {
-        try {
-          const data = await apiHandler(
-            getWeatherData,
-            city.CityCode,
-            UNITS,
-            API_KEY
-          );
-          setWeather(data);
-          setCache(city.CityCode, data);
-          console.log("Load weather from API for: ", city.CityName);
-        } catch (error) {
-          setError(error);
-        }
-      }
-    };
+    fetchData();
 
-    // using separate function to get weather data.
     const resetCache = async () => {
       try {
         const data = await apiHandler(
@@ -67,9 +34,6 @@ const WeatherWidget = ({ city, removeCity }) => {
       }
     };
 
-    fetchData();
-
-    // auto re-render each component, interval time set to each city's cache expire time
     const interval = setInterval(() => {
       resetCache();
     }, timeToMilliseconds(city.ExpTimeUnit, city.ExpTime));
@@ -78,6 +42,39 @@ const WeatherWidget = ({ city, removeCity }) => {
       clearInterval(interval);
     };
   }, []);
+
+  const fetchData = async () => {
+    if (hasKey(city.CityCode)) {
+      setWeather(getCache(city));
+      console.log("Load weather from cache for: ", city.CityName);
+    } else {
+      try {
+        const data = await apiHandler(
+          getWeatherData,
+          city.CityCode,
+          UNITS,
+          API_KEY
+        );
+        setWeather(data);
+        setCache(city.CityCode, data);
+        console.log("Load weather from API for: ", city.CityName);
+      } catch (error) {
+        setError(error);
+      }
+    }
+  };
+
+  const getWeatherData = async (id, units, api_key) => {
+    const response = await fetch(
+      `${API_URL}/weather?id=${id}&units=${units}&APPID=${api_key}`
+    );
+    if (!response.ok) {
+      throw new Error(`API Error : Error status - ${response.status}`);
+    }
+    let data = await response.json();
+    data = formatWeatherData(data);
+    return data;
+  };
 
   const handleClick = (id) => {
     navigate(`/${id}`, { state: { cityCode: city.CityCode } });
