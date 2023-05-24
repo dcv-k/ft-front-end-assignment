@@ -5,23 +5,23 @@
       "CityName": "Colombo",
       "Temp": "33.0",
       "Status": "Clouds",
-      "ExpireTime": "5",
-      "TimeUnit": "MIN"
+      "ExpireTime": "10",
+      "TimeUnit": "SEC"
     },
     {
       "CityCode": "1850147",
       "CityName": "Tokyo",
       "Temp": "8.6",
       "Status": "Clear",
-      "ExpireTime": "10",
-      "TimeUnit": "MIN"
+      "ExpireTime": "30",
+      "TimeUnit": "SEC"
     },
     {
       "CityCode": "2644210",
       "CityName": "Liverpool",
       "Temp": "16.5",
       "Status": "Rain",
-      "ExpireTime": "20",
+      "ExpireTime": "1",
       "TimeUnit": "MIN"
     },
     {
@@ -29,7 +29,7 @@
       "CityName": "Paris",
       "Temp": "22.4",
       "Status": "Clear",
-      "ExpireTime": "2",
+      "ExpireTime": "1",
       "TimeUnit": "MIN"
     },
     {
@@ -37,7 +37,7 @@
       "CityName": "Sydney",
       "Temp": "27.3",
       "Status": "Rain",
-      "ExpireTime": "20",
+      "ExpireTime": "1",
       "TimeUnit": "MIN"
     },
     {
@@ -45,7 +45,7 @@
       "CityName": "Boston",
       "Temp": "4.2",
       "Status": "Mist",
-      "ExpireTime": "20",
+      "ExpireTime": "2",
       "TimeUnit": "MIN"
     },
     {
@@ -53,7 +53,7 @@
       "CityName": "Shanghai",
       "Temp": "10.1",
       "Status": "Clouds",
-      "ExpireTime": "20",
+      "ExpireTime": "2",
       "TimeUnit": "MIN"
     },
     {
@@ -61,7 +61,7 @@
       "CityName": "Oslo",
       "Temp": "-3.9",
       "Status": "Clear",
-      "ExpireTime": "20",
+      "ExpireTime": "2",
       "TimeUnit": "MIN"
     }
   ]

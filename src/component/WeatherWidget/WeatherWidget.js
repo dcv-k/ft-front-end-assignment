@@ -17,6 +17,24 @@ const WeatherWidget = ({ city, removeCity }) => {
   useEffect(() => {
     let renderFreshData = true;
     let expireTime = getMilliseconds(city.ExpireTime, city.TimeUnit);
+
+    const fetchData = async (freshData = false) => {
+      console.log("fetchData", freshData);
+      if (!freshData && getCache(city)) {
+        setWeather(getCache(city));
+        console.log("Load weather from cache for: ", city.CityName);
+      } else {
+        try {
+          const data = await getWeather(city.CityCode, UNITS, API_KEY);
+          setWeather(data);
+          setCache(city.CityCode, data);
+          console.log("Load weather from API for: ", city.CityName);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    };
+
     fetchData();
 
     const i = setInterval(() => {
@@ -27,22 +45,6 @@ const WeatherWidget = ({ city, removeCity }) => {
       clearInterval(i);
     };
   }, []);
-
-  const fetchData = async (freshData = false) => {
-    if (!freshData && hasKey(city.CityCode)) {
-      setWeather(getCache(city));
-      console.log("Load weather from cache for: ", city.CityName);
-    } else {
-      try {
-        const data = await getWeather(city.CityCode, UNITS, API_KEY);
-        setWeather(data);
-        setCache(city.CityCode, data);
-        console.log("Load weather from API for: ", city.CityName);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
 
   const getWeather = async (id, units, apiKey) => {
     const data = await makeApiRequest(

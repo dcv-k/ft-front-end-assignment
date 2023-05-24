@@ -1,6 +1,6 @@
-import { UNITS, PATH_ERROR, API_URL, API_KEY, JSON_URL } from "constants";
+import { UNITS, PATH_ERROR, API_URL, API_KEY } from "constants";
 import "./Details.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFlattenWeather } from "hooks/useFlattenWeather";
 import { useLocation, useNavigate } from "react-router-dom";
 import useApiHandler from "hooks/useApiHandler";
@@ -12,10 +12,10 @@ const Details = () => {
   const { flattenWeather } = useFlattenWeather();
   const { error, makeApiRequest } = useApiHandler();
 
-  const cityName = useRef("");
   const { cityCode } = location.state;
 
   useEffect(() => {
+    console.log("details useEffect");
     let isMounted = false;
 
     const fetchData = async () => {
@@ -24,8 +24,8 @@ const Details = () => {
         if (!isMounted) {
           setWeather(data);
         }
-      } catch (error) {
-        cityName.current = getCityName(JSON_URL);
+      } catch (err) {
+        console.log(err);
       }
     };
     fetchData();
@@ -34,12 +34,6 @@ const Details = () => {
       isMounted = true;
     };
   }, []);
-
-  const getCityName = async (path) => {
-    const { List } = await makeApiRequest(path, { method: "GET" });
-    const city = List.find((city) => city.CityCode === cityCode);
-    return city.CityName;
-  };
 
   const getWeather = async (id, units, apiKey) => {
     const data = await makeApiRequest(

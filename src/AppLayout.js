@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { PATH_LOGO } from "constants";
-import useApiHandler from "hooks/useApiHandler";
 
 const AppLayout = () => {
   return (
