@@ -11,18 +11,18 @@ const Dashboard = () => {
   const { error, makeApiRequest } = useApiHandler();
 
   useEffect(() => {
-    let isMounted = false;
+    let isMounted = true;
 
     const fetchData = async () => {
       const data = await getCities(JSON_URL);
-      if (!isMounted) {
+      if (isMounted) {
         setCities(data);
       }
     };
     fetchData();
 
     return () => {
-      isMounted = true;
+      isMounted = false;
     };
   }, []);
 
