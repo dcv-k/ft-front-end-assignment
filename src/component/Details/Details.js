@@ -6,32 +6,27 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useApiHandler from "hooks/useApiHandler";
 
 const Details = () => {
+  const [weather, setWeather] = useState();
+
   const navigate = useNavigate();
   const location = useLocation();
-  const [weather, setWeather] = useState();
+  const { cityCode } = location.state;
   const { flattenWeather } = useFlattenWeather();
   const { error, makeApiRequest } = useApiHandler();
 
-  const { cityCode } = location.state;
-
   useEffect(() => {
-    console.log("details useEffect");
-    let isMounted = false;
+    let isMounted = true;
 
     const fetchData = async () => {
-      try {
-        const data = await getWeather(cityCode, UNITS, API_KEY);
-        if (!isMounted) {
-          setWeather(data);
-        }
-      } catch (err) {
-        console.log(err);
+      const data = await getWeather(cityCode, UNITS, API_KEY);
+      if (isMounted) {
+        setWeather(data);
       }
     };
     fetchData();
 
     return () => {
-      isMounted = true;
+      isMounted = false;
     };
   }, []);
 

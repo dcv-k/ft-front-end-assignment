@@ -6,6 +6,7 @@ import WeatherWidget from "../WeatherWidget/WeatherWidget";
 import { JSON_URL, PATH_ERROR } from "../../constants";
 
 const Dashboard = () => {
+  const renderFreshData = true;
   const [cities, setCities] = useState(null);
   const { error, makeApiRequest } = useApiHandler();
 
@@ -67,6 +68,7 @@ const Dashboard = () => {
               key={city.CityCode}
               city={city}
               removeCity={removeCity}
+              renderFreshData={renderFreshData}
             />
           ))}
       </section>

@@ -7,34 +7,31 @@ import { useCacheHandler } from "hooks/useCacheHandler";
 import { useFlattenWeather } from "hooks/useFlattenWeather";
 import { API_URL, API_KEY, UNITS, PATH_ERROR } from "constants";
 
-const WeatherWidget = ({ city, removeCity }) => {
-  const navigate = useNavigate();
+const WeatherWidget = ({ city, removeCity, renderFreshData }) => {
   const [weather, setWeather] = useState(null);
-  const { error, makeApiRequest } = useApiHandler();
+
+  const navigate = useNavigate();
   const { flattenWeather } = useFlattenWeather();
-  const { hasKey, setCache, getCache, getMilliseconds } = useCacheHandler();
+  const { error, makeApiRequest } = useApiHandler();
+  const { setCache, getCache, getMilliseconds } = useCacheHandler();
+  const expireTime = getMilliseconds(city.ExpireTime, city.TimeUnit);
 
   useEffect(() => {
-    let renderFreshData = true;
-    let expireTime = getMilliseconds(city.ExpireTime, city.TimeUnit);
+    let isMounted = true;
 
     const fetchData = async (freshData = false) => {
-      console.log("fetchData", freshData);
       if (!freshData && getCache(city)) {
         setWeather(getCache(city));
         console.log("Load weather from cache for: ", city.CityName);
       } else {
-        try {
-          const data = await getWeather(city.CityCode, UNITS, API_KEY);
+        const data = await getWeather(city.CityCode, UNITS, API_KEY);
+        if (isMounted) {
           setWeather(data);
-          setCache(city.CityCode, data);
-          console.log("Load weather from API for: ", city.CityName);
-        } catch (err) {
-          console.log(err);
         }
+        setCache(city.CityCode, data);
+        console.log("Load weather from API for: ", city.CityName);
       }
     };
-
     fetchData();
 
     const i = setInterval(() => {
@@ -42,6 +39,8 @@ const WeatherWidget = ({ city, removeCity }) => {
     }, expireTime);
 
     return () => {
+      isMounted = false;
+      setWeather(null);
       clearInterval(i);
     };
   }, []);

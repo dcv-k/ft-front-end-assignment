@@ -149,6 +149,11 @@
   }
   
   @media only screen and (max-width: 480px) {
+
+    .weather-widget {
+      width: 350px;
+    }
+
     .weather-widget .top {
         flex-direction: column;
         justify-content: center;
