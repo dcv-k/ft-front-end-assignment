@@ -10,7 +10,7 @@ const Details = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { cityCode } = location.state;
+  const { cityCode, expireTime } = location.state;
   const { flattenWeather } = useFlattenWeather();
   const { error, makeApiRequest } = useApiHandler();
 
@@ -21,12 +21,18 @@ const Details = () => {
       const data = await getWeather(cityCode, UNITS, API_KEY);
       if (isMounted) {
         setWeather(data);
+        console.log("Fresh Data from API");
       }
     };
     fetchData();
 
+    const i = setInterval(() => {
+      fetchData();
+    }, expireTime);
+
     return () => {
       isMounted = false;
+      clearInterval(i);
     };
   }, []);
 

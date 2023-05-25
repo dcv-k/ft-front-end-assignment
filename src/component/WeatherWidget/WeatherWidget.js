@@ -54,7 +54,9 @@ const WeatherWidget = ({ city, removeCity, renderFreshData }) => {
   };
 
   const handleClick = (id) => {
-    navigate(`/${id}`, { state: { cityCode: city.CityCode } });
+    navigate(`/${id}`, {
+      state: { cityCode: city.CityCode, expireTime: expireTime },
+    });
   };
 
   const handleRemoveClick = (e, id) => {
