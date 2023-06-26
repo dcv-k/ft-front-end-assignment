@@ -27,8 +27,8 @@ const WeatherWidget = ({ city, removeCity, renderFreshData }) => {
         const data = await getWeather(city.CityCode, UNITS, API_KEY);
         if (isMounted) {
           setWeather(data);
+          setCache(city.CityCode, data);
         }
-        setCache(city.CityCode, data);
         console.log("Load weather from API for: ", city.CityName);
       }
     };

@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import useApiHandler from "hooks/useApiHandler";
 import WeatherWidget from "../WeatherWidget/WeatherWidget";
 import { JSON_URL, PATH_ERROR } from "../../constants";
+import LogoutButton from "component/LogoutButton/LogoutButton";
 
 const Dashboard = () => {
   const renderFreshData = true;
