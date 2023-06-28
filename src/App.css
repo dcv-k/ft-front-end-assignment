@@ -4,6 +4,58 @@
   height: 100vh
 }
 
+.login-card-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 10rem;
+}
+
+.login-card {
+  background-color: var(--color-grey);
+  color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 200px;
+
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.login-card .title {
+  text-transform: uppercase;
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  margin-bottom: 2rem;
+}
+
+.login-card .login-btn {
+  background-color: var(--color-green);
+  text-transform: uppercase;
+  padding: 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-card .footer {
+  color: grey;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin-bottom: .1rem;
+}
+
+
 .btn {
   display: flex;
   justify-content: center;

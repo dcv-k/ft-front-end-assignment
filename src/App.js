@@ -24,12 +24,25 @@ function App() {
   const { loginWithRedirect, isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div class="loader"></div>;
   }
 
   if (!isAuthenticated) {
-    loginWithRedirect();
-    return null;
+    return (
+      <>
+        <div className="login-card-wrap">
+          <div className="login-card">
+            <p className="title">Welcome to the Weather App</p>
+            <p className="body">
+              <div className="login-btn" onClick={loginWithRedirect}>
+                Login
+              </div>
+            </p>
+            <p className="footer">Fidenz academy</p>
+          </div>
+        </div>
+      </>
+    );
   }
 
   return <RouterProvider router={router} />;
