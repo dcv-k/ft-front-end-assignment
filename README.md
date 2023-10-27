@@ -26,5 +26,5 @@ Welcome the weather app, a project fueled by our passion for combining the power
   
 ## Installation & Usage  
 In project directory  
-run **npm install**  
-then run **npm start**
+- run **npm install**  
+- then run **npm start**
