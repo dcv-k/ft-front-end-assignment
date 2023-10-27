@@ -6,7 +6,8 @@ Welcome the weather app, a project fueled by our passion for combining the power
 
 ## Features
 
-- **Real-Time Weather Data:** Get instant access to real-time weather information for cities around the world.
+- **Real-Time Weather Data:**
+    Get instant access to real-time weather information for cities around the world.
 - **Intuitive User Interface:** Enjoy a user-friendly and visually appealing GUI designed with React for a seamless user experience.
 - **Auto-Update:** Stay informed without manual refresh - the app automatically updates weather data to keep you current.
 - **Search and Select Cities:** Easily search for and select your desired cities to view their weather details.
