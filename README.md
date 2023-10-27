@@ -1,5 +1,9 @@
 # Weather App
-![1 Dashboard](https://github.com/dcv-k/ft-front-end-assignment/assets/120501997/4dbaaa30-6241-4fbf-a0e7-da2bff45e902)
+![1 Dashboard](https://github.com/dcv-k/ft-front-end-assignment/assets/120501997/4dbaaa30-6241-4fbf-a0e7-da2bff45e902)  
+
+## Motivation  
+Welcome the weather app, a project fueled by our passion for combining the power of real-time data and a user-friendly interface. This app, built with React, not only provides up-to-the-minute weather details but also offers an intuitive and visually appealing experience. I'm motivated to create a tool that seamlessly auto-updates weather information, so you never miss a beat. With this project, I aim to make staying connected with the weather as effortless as looking out your window!
+
 ### Install dependencies for client, in in root directory
 
 npm install
