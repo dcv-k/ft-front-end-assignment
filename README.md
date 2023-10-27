@@ -24,6 +24,11 @@ Welcome the weather app, a project fueled by our passion for combining the power
 - **Responsive Design:**  
   Enjoy a responsive design that adapts to various screen sizes, including mobile devices and tablets.
   
+## Installation & Usage  
+In project directory
+run **npm install**
+then run **npm start**
+
 
 ### Install dependencies for client, in in root directory
 
