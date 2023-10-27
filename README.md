@@ -1,3 +1,4 @@
+# Weather App
 ![1 Dashboard](https://github.com/dcv-k/ft-front-end-assignment/assets/120501997/4dbaaa30-6241-4fbf-a0e7-da2bff45e902)
 ### Install dependencies for client, in in root directory
 
